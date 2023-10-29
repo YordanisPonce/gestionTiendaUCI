@@ -81,7 +81,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = Product::create($request->only('name'));
+        $product = Product::create($request->only('name', 'amount', 'price', 'format'));
 
         return redirect()->route('products.index')->with('message', 'Producto agregado satisfactoriamente');
     }
@@ -134,8 +134,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $product->update($request->only('name'));
-        return redirect()->route('products.index')->with('message', 'Producto actualizadpo existosamente');
+        $product->update($request->only('name', 'amount', 'price', 'format'));
+        return redirect()->route('products.index')->with('message', 'Producto actualizado existosamente');
     }
 
     /**

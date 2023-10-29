@@ -17,9 +17,9 @@
             <header class=" card-header noborder">
                 <div class="justify-end flex gap-3 items-center flex-wrap">
                     {{-- Create Button start --}}
-                    {{--  @can('product create') --}}
+                    {{--  @can('area create') --}}
                     <a class="btn inline-flex justify-center btn-dark rounded-[25px] items-center !p-2 !px-3"
-                        href="{{ route('products.create') }}">
+                        href="{{ route('areas.create') }}">
                         <iconify-icon icon="ic:round-plus" class="text-lg mr-1">
                         </iconify-icon>
                         {{ __('New') }}
@@ -27,13 +27,13 @@
                     {{--      @endcan --}}
                     {{-- Refresh Button start --}}
                     <a class="btn inline-flex justify-center btn-dark rounded-[25px] items-center !p-2.5"
-                        href="{{ route('products.index') }}">
+                        href="{{ route('areas.index') }}">
                         <iconify-icon icon="mdi:refresh" class="text-xl "></iconify-icon>
                     </a>
                 </div>
                 <div class="justify-center flex flex-wrap sm:flex items-center lg:justify-end gap-3">
                     <div class="relative w-full sm:w-auto flex items-center">
-                        <form id="searchForm" method="get" action="{{ route('products.index') }}">
+                        <form id="searchForm" method="get" action="{{ route('areas.index') }}">
                             <input name="q" type="text"
                                 class="inputField pl-8 p-2 border border-slate-200 dark:border-slate-700 rounded-md dark:bg-slate-900"
                                 placeholder="Search" value="{{ request()->q }}">
@@ -57,15 +57,6 @@
                                             Nombre
                                         </th>
                                         <th scope="col" class="table-th ">
-                                            Cantidad
-                                        </th>
-                                        <th scope="col" class="table-th ">
-                                            Formato
-                                        </th>
-                                        <th scope="col" class="table-th ">
-                                            Precio
-                                        </th>
-                                        <th scope="col" class="table-th ">
                                             {{ __('Creado') }}
                                         </th>
                                         <th scope="col" class="table-th w-20">
@@ -75,64 +66,55 @@
                                 </thead>
                                 <tbody
                                     class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
-                                    @forelse ($products as $product)
+                                    @forelse ($areas as $area)
                                         <tr>
                                             <td class="table-td">
-                                                # {{ $product->id }}
+                                                # {{ $area->id }}
                                             </td>
                                             <td class="table-td">
                                                 <div class="flex items-center">
                                                     <div class="flex-none">
                                                         <div class="w-8 h-8 rounded-[100%] ltr:mr-3 rtl:ml-3">
                                                             <img class="w-full h-full rounded-[100%] object-cover"
-                                                                src="{{ Avatar::create($product->name)->toBase64() }}"
+                                                                src="{{ Avatar::create($area->name)->toBase64() }}"
                                                                 alt="image">
                                                         </div>
                                                     </div>
                                                     <div class="flex-1 text-start">
                                                         <h4
                                                             class="text-sm font-medium text-slate-600 whitespace-nowrap">
-                                                            {{ $product->name }}
+                                                            {{ $area->name }}
                                                         </h4>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="table-td">
-                                                {{ $product->amount }}
-                                            </td>
-                                            <td class="table-td">
-                                                {{ $product->format }}
-                                            </td>
-                                            <td class="table-td">
-                                                {{ $product->price }}
-                                            </td>
-                                            <td class="table-td">
-                                                {{ $product->created_at->diffForHumans() }}
+                                                {{ $area->created_at->diffForHumans() }}
                                             </td>
                                             <td class="table-td">
                                                 <div class="flex space-x-3 rtl:space-x-reverse">
                                                     {{-- view --}}
-                                                    @can('product show')
+                                                    @can('area show')
                                                         <a class="action-btn"
-                                                            href="{{ route('products.show', $product) }}">
+                                                            href="{{ route('areas.show', $area) }}">
                                                             <iconify-icon icon="heroicons:eye"></iconify-icon>
                                                         </a>
                                                     @endcan
                                                     {{-- Edit --}}
-                                                    {{--   @can('product update') --}}
+                                                    {{--   @can('area update') --}}
                                                     <a class="action-btn"
-                                                        href="{{ route('products.edit', ['product' => $product]) }}">
+                                                        href="{{ route('areas.edit', ['area' => $area]) }}">
                                                         <iconify-icon icon="heroicons:pencil-square"></iconify-icon>
                                                     </a>
                                                     {{--          @endcan --}}
                                                     {{-- delete --}}
-                                                    {{--  @can('product delete') --}}
-                                                    <form id="deleteForm{{ $product->id }}" method="POST"
-                                                        action="{{ route('products.destroy', $product) }}">
+                                                    {{--  @can('area delete') --}}
+                                                    <form id="deleteForm{{ $area->id }}" method="POST"
+                                                        action="{{ route('areas.destroy', $area) }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <a class="action-btn cursor-pointer"
-                                                            onclick="sweetAlertDelete(event, 'deleteForm{{ $product->id }}')"
+                                                            onclick="sweetAlertDelete(event, 'deleteForm{{ $area->id }}')"
                                                             type="submit">
                                                             <iconify-icon icon="heroicons:trash"></iconify-icon>
                                                         </a>
@@ -153,7 +135,7 @@
                                     @endforelse
                                 </tbody>
                             </table>
-                            <x-table-footer :per-page-route-name="'products.index'" :data="$products" />
+                            <x-table-footer :per-page-route-name="'areas.index'" :data="$areas" />
                         </div>
                     </div>
                 </div>

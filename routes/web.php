@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppsController;
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
@@ -44,8 +45,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Database Backup
     Route::resource('database-backups', DatabaseBackupController::class);
+    // Areas 
+    Route::resource('areas', AreaController::class);
 
-    
+
     // Product
     Route::resource('products', ProductController::class);
     Route::get('database-backups-download/{fileName}', [DatabaseBackupController::class, 'databaseBackupDownload'])->name('database-backups.download');

@@ -47,6 +47,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('database-backups', DatabaseBackupController::class);
     // Areas 
     Route::resource('areas', AreaController::class);
+    Route::controller(AreaController::class)->prefix('areas')->as('areas.')->group(function () {
+      Route::get('asign/{area}', 'asign')->name('asign');
+      Route::post('asign/{area}', 'asignProduct')->name('asignProduct');
+    });
 
 
     // Product

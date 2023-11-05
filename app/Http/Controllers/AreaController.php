@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class AreaController extends Controller
@@ -53,7 +55,7 @@ class AreaController extends Controller
      */
     public function create()
     {
-       
+
         $breadcrumbsItems = [
             [
                 'name' => 'Areas',
@@ -92,9 +94,40 @@ class AreaController extends Controller
      * @param  \App\Models\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function show(Area $area)
+    public function show(Area $area, Request $request)
     {
-        //
+        $breadcrumbsItems = [
+            [
+                'name' => 'Areas',
+                'url' => route('areas.index'),
+                'active' => true
+            ],
+            [
+                'name' => 'Areas',
+                'url' => route('areas.show', ['area' => $area]),
+                'active' => false
+            ],
+        ];
+
+        $q = $request->get('q');
+        $perPage = $request->get('per_page', 10);
+        $sort = $request->get('sort');
+
+        $products = QueryBuilder::for(Product::class)
+            ->allowedSorts(['name'])
+            ->whereNotIn('id', function ($query) use ($area) {
+                $query->select('id')->from('area_products')->where('area_id', $area->id);
+            })
+            ->latest()
+            ->paginate($perPage)
+            ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
+
+        return view('areas.area_product', [
+            'products' => $products,
+            'breadcrumbItems' => $breadcrumbsItems,
+            'pageTitle' => 'Productos asignados a el area ' . $area->name,
+            'area' => $area
+        ]);
     }
 
     /**
@@ -146,9 +179,48 @@ class AreaController extends Controller
      */
     public function destroy(Area $area)
     {
-        
+
         $area->delete();
 
         return to_route('areas.index')->with('message', 'Area eliminada satisfactoriamente');
+    }
+
+    public function asign(Area $area)
+    {
+        $breadcrumbsItems = [
+            [
+                'name' => 'Áreas',
+                'url' => route('areas.index'),
+                'active' => false
+            ],
+            [
+                'name' => 'Asignación',
+                'url' => '#',
+                'active' => true
+            ],
+        ];
+        $products = Product::whereHas(
+            'areas',
+            function ($query) use ($area) {
+                $query->where('areas.id', '<>', $area->id);
+            }
+        )->get();
+
+        return view('areas.asign', [
+            'area' => $area,
+            'products' => $products,
+            'breadcrumbItems' => $breadcrumbsItems,
+            'pageTitle' => 'Asignación ' . $area->name,
+        ]);
+    }
+
+    public function  asignProduct(Area $area, Request $request)
+    {
+        $product = Product::find($request->product_id);
+        if ($product) {
+            $area->products()->attach($product);
+        }
+
+        return redirect()->route('areas.show', ['area' => $area])->with('message', 'Producto asignado existosamente');
     }
 }

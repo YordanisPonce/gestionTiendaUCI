@@ -48,7 +48,8 @@ class UserController extends Controller
         $sort = $request->get('sort');
 
         $users = QueryBuilder::for(User::class)
-            ->allowedSorts(['name', 'email','phone', 'post_code', 'city', 'country'])
+        ->with('area')    
+        ->allowedSorts(['name', 'email','phone', 'post_code', 'city', 'country'])
             ->where('name', 'like', "%$q%")
             ->orWhere('email', 'like', "%$q%")
             ->withoutAuthUser()

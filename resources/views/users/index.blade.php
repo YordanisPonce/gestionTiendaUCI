@@ -55,7 +55,7 @@
                                             {{ __('Email') }}
                                         </th>
                                         <th scope="col" class="table-th ">
-                                            {{ __('Member Since') }}
+                                            &Aacute;rea
                                         </th>
                                         <th scope="col" class="table-th ">
                                             {{ __('Verified') }}
@@ -89,7 +89,7 @@
                                             {{ $user->email }}
                                         </td>
                                         <td class="table-td">
-                                            {{ $user->created_at->diffForHumans() }}
+                                            {{ $user->area->name }}
                                         </td>
                                         <td class="table-td">
                                             @if($user->email_verified_at)

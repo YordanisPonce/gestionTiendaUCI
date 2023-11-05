@@ -36,6 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'city',
         'country',
         'photo',
+        'area_id',
     ];
 
     /**
@@ -85,6 +86,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     {
         return $query->where('id', '!=', 1);
     }
-
+   
+    public function area(){
+        return $this->belongsTo(Area::class);
+    }
 
 }

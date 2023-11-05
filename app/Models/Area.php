@@ -9,4 +9,12 @@ class Area extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
+
+    public function users(){
+        return $this->hasMany(User::class);
+    }
+
+    public function products(){
+        return $this->belongsToMany(Product::class, 'area_products');
+    }
 }

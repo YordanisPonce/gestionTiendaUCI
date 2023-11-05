@@ -39,6 +39,14 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('users.index') }}" class="navItem {{ (request()->is('users*')) || (request()->is('users*')) || (request()->is('users*')) || (request()->is('users*')) || (request()->is('users*')) ? 'active' : '' }}">
+                    <span class="flex items-center">
+                        <iconify-icon class=" nav-icon" icon="fa:users"></iconify-icon>
+                        <span>{{ __('Usuarios') }}</span>
+                    </span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('areas.index') }}" class="navItem {{ (request()->is('areas*')) || (request()->is('areas*')) || (request()->is('areas*')) || (request()->is('areas*')) || (request()->is('areas*')) ? 'active' : '' }}">
                     <span class="flex items-center">
                         <iconify-icon class=" nav-icon" icon="carbon:area-custom"></iconify-icon>

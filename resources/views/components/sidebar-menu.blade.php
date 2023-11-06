@@ -25,7 +25,7 @@
                 <a href="{{ route('dashboard.index') }}" class="navItem {{ (request()->is('dashboard*')) ? 'active' : '' }}">
                     <span class="flex items-center">
                         <iconify-icon class=" nav-icon" icon="heroicons-outline:home"></iconify-icon>
-                        <span>{{ __('Home') }}</span>
+                        <span>{{ __('Inicio') }}</span>
                     </span>
                 </a>
             </li>

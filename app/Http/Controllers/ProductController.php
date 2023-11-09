@@ -61,7 +61,7 @@ class ProductController extends Controller
                 'active' => false
             ],
             [
-                'name' => 'Create',
+                'name' => 'Crear',
                 'url' => route('products.create'),
                 'active' => true
             ],
@@ -69,7 +69,7 @@ class ProductController extends Controller
 
         return view('products.create', [
             'breadcrumbItems' => $breadcrumbsItems,
-            'pageTitle' => 'Create Product'
+            'pageTitle' => 'Crear Producto'
         ]);
     }
 
@@ -111,7 +111,7 @@ class ProductController extends Controller
                 'active' => false
             ],
             [
-                'name' => 'Edit',
+                'name' => 'Editar',
                 'url' => '#',
                 'active' => true
             ],
@@ -120,7 +120,7 @@ class ProductController extends Controller
         return view('products.edit', [
             'product' => $product,
             'breadcrumbItems' => $breadcrumbsItems,
-            'pageTitle' => 'Edit product',
+            'pageTitle' => 'Editar producto',
         ]);
     }
 

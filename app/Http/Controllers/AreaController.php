@@ -145,7 +145,7 @@ class AreaController extends Controller
                 'active' => false
             ],
             [
-                'name' => 'Edit',
+                'name' => 'Editar',
                 'url' => '#',
                 'active' => true
             ],
@@ -154,7 +154,7 @@ class AreaController extends Controller
         return view('areas.edit', [
             'area' => $area,
             'breadcrumbItems' => $breadcrumbsItems,
-            'pageTitle' => 'Edit area',
+            'pageTitle' => 'Editar area',
         ]);
     }
 

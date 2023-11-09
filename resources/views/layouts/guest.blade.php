@@ -14,20 +14,15 @@
         <div class="loginwrapper">
             <div class="lg-inner-column">
                 <div class="left-column relative z-[1]">
-                    <div class="max-w-[520px] pt-20 ltr:pl-20 rtl:pr-20">
+                    <div class="p-4 px-7 w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <!-- APPLICATION LOGO -->
-                        <div class="mb-6">
-                            <x-application-logo />
-                        </div>
-                        <h4>
-                            {{ __('Unlock your project') }}
-                            <span class="text-slate-800 dark:text-slate-400 font-bold">
-                                {{ __('Performance') }}
-                            </span>
+
+                        <h4 class="w-full mb-5">
+                           {{config('app.name')}}
                         </h4>
-                    </div>
-                    <div class="absolute left-0 2xl:bottom-[-160px] bottom-[-130px] h-full w-full z-[-1]">
-                        <img class="h-full w-full object-containll" src="{{ getSettings('guest_background') }}" alt="image">
+                        <p class="w-full text-2xl italic bold">
+                            Potenciando tu cadena de suministros con distribuci&oacute;n de calidad
+                        </p>
                     </div>
                 </div>
                 <div class="right-column  relative">

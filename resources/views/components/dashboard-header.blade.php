@@ -11,7 +11,7 @@
                 <button class="sidebarOpenButton text-xl text-slate-900 dark:text-white !ml-0">
                     <iconify-icon icon="ph:arrow-right-bold"></iconify-icon>
                 </button>
-                <x-header-search />
+               {{--  <x-header-search /> --}}
             </div>
             <!-- end vertcial -->
 
@@ -44,16 +44,20 @@
 </div>
 
 <!-- BEGIN: Search Modal -->
-<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto inset-0 bg-slate-900/40 backdrop-filter backdrop-blur-sm backdrop-brightness-10" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+<div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto inset-0 bg-slate-900/40" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog relative w-auto pointer-events-none top-1/4">
         <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-900 bg-clip-padding rounded-md outline-none text-current">
             <form>
+                <label for="amount" class="p-4 border-b text-2xl">Nyeva asignacion</label>
                 <div class="relative">
-                    <button class="absolute left-0 top-1/2 -translate-y-1/2 w-9 h-full text-xl dark:text-slate-300 flex items-center justify-center">
-                        <iconify-icon icon="heroicons-solid:search"></iconify-icon>
-                    </button>
-                    <input type="text" class="form-control !py-[14px] !pl-10" placeholder="Search" autofocus>
+                    <input type="text" class="form-control p-5" placeholder="Cantidad" autofocus>
                 </div>
+                <button class="btn inline-flex justify-center btn-dark rounded-[25px] items-center !p-2 !px-3"
+                href="{{ route('products.create') }}">
+                <iconify-icon icon="ic:round-plus" class="text-lg mr-1">
+                </iconify-icon>
+                {{ __('Creare') }}
+            </button>
             </form>
         </div>
     </div>

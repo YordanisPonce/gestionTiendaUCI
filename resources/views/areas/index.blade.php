@@ -106,10 +106,10 @@
                                                         href="{{ route('areas.edit', ['area' => $area]) }}">
                                                         <iconify-icon icon="heroicons:pencil-square"></iconify-icon>
                                                     </a>
-                                                    <a class="action-btn"
+                                                {{--     <a class="action-btn"
                                                     href="{{ route('areas.asign', ['area' => $area]) }}">
                                                     <iconify-icon icon="ic:baseline-plus"></iconify-icon>
-                                                </a>
+                                                </a> --}}
                                                     {{--          @endcan --}}
                                                     {{-- delete --}}
                                                     {{--  @can('area delete') --}}

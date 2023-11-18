@@ -57,9 +57,6 @@
                                             Nombre
                                         </th>
                                         <th scope="col" class="table-th ">
-                                            Cantidad
-                                        </th>
-                                        <th scope="col" class="table-th ">
                                             Formato
                                         </th>
                                         <th scope="col" class="table-th ">
@@ -98,9 +95,6 @@
                                                 </div>
                                             </td>
                                             <td class="table-td">
-                                                {{ $product->amount }}
-                                            </td>
-                                            <td class="table-td">
                                                 {{ $product->format }}
                                             </td>
                                             <td class="table-td">
@@ -111,6 +105,10 @@
                                             </td>
                                             <td class="table-td">
                                                 <div class="flex space-x-3 rtl:space-x-reverse">
+<button class="action-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
+<iconify-icon icon="heroicons:plus"></iconify-icon>
+</button>
+
                                                     {{-- view --}}
                                                     @can('product show')
                                                         <a class="action-btn"

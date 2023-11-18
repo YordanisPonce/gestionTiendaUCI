@@ -22,12 +22,6 @@
                         <x-input-error :messages="$errors->get('name')" class="mt-2"/>
                     </div>
                     <div class="input-area">
-                        <label for="amount" class="form-label">{{ __('Cantidad') }}</label>
-                        <input name="amount" type="text" id="amount" class="form-control"
-                               placeholder="{{ __('Introducir cantidad') }}" value="{{ $product->amount }}" required>
-                        <x-input-error :messages="$errors->get('amount')" class="mt-2"/>
-                    </div>
-                    <div class="input-area">
                         <label for="format" class="form-label">{{ __('Formato') }}</label>
                         <input name="format" type="text" id="format" class="form-control"
                                placeholder="{{ __('Introducir formato') }}" value="{{ $product->format }}" required>

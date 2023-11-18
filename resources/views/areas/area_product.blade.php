@@ -46,9 +46,6 @@
                                             Nombre
                                         </th>
                                         <th scope="col" class="table-th ">
-                                            Cantidad
-                                        </th>
-                                        <th scope="col" class="table-th ">
                                             Formato
                                         </th>
                                         <th scope="col" class="table-th ">
@@ -85,9 +82,6 @@
                                                         </h4>
                                                     </div>
                                                 </div>
-                                            </td>
-                                            <td class="table-td">
-                                                {{ $product->amount }}
                                             </td>
                                             <td class="table-td">
                                                 {{ $product->format }}

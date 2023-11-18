@@ -8,13 +8,13 @@
         <x-application-logo />
 
         <!-- Sidebar Type Button -->
-        <div id="sidebar_type" class="cursor-pointer text-slate-900 dark:text-white text-lg">
+{{--         <div id="sidebar_type" class="cursor-pointer text-slate-900 dark:text-white text-lg">
             <iconify-icon class="sidebarDotIcon extend-icon text-slate-900 dark:text-slate-200" icon="fa-regular:dot-circle"></iconify-icon>
             <iconify-icon class="sidebarDotIcon collapsed-icon text-slate-900 dark:text-slate-200" icon="material-symbols:circle-outline"></iconify-icon>
         </div>
         <button class="sidebarCloseIcon text-2xl inline-block md:hidden">
             <iconify-icon class="text-slate-900 dark:text-slate-200" icon="clarity:window-close-line"></iconify-icon>
-        </button>
+        </button> --}}
     </div>
     <div id="nav_shadow" class="nav_shadow h-[60px] absolute top-[80px] nav-shadow z-[1] w-full transition-all duration-200 pointer-events-none
       opacity-0"></div>

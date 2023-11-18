@@ -44,6 +44,12 @@ class PermissionSeeder extends Seeder
             ['name'=>'menu role_permission_permissions', 'module_name'=>'menu'],
             ['name'=>'menu role_permission_roles', 'module_name'=>'menu'],
             ['name'=>'menu database_backup', 'module_name'=>'menu'],
+
+            ['name' => 'area-product create', 'module_name' => 'areaProduct'],
+            ['name' => 'area-product update', 'module_name' => 'areaProduct'],
+            ['name' => 'area-product delete', 'module_name' => 'areaProduct'],
+            ['name' => 'area-product show', 'module_name' => 'areaProduct'],
+            ['name' => 'area-product index', 'module_name' => 'areaProduct'],
         ]);
 
         $web = collect([]);

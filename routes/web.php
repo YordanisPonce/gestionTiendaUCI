@@ -55,5 +55,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Product
     Route::resource('products', ProductController::class);
+
+        // Asigments
+        Route::resource('area-products', ProductController::class);
     Route::get('database-backups-download/{fileName}', [DatabaseBackupController::class, 'databaseBackupDownload'])->name('database-backups.download');
 });

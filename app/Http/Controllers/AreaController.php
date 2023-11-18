@@ -83,7 +83,7 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        $area = Area::create($request->only('name'));
+        $area = Area::create($request->only('name','workers_count'));
 
         return redirect()->route('areas.index')->with('message', 'Area agregada satisfactoriamente');
     }
@@ -167,7 +167,7 @@ class AreaController extends Controller
      */
     public function update(Request $request, Area $area)
     {
-        $area->update($request->only('name'));
+        $area->update($request->only('name','workers_count'));
         return redirect()->route('areas.index')->with('message', 'Area actualizada existosamente');
     }
 

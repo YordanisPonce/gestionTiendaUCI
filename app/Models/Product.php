@@ -10,6 +10,6 @@ class Product extends Model
     use HasFactory;
     protected $fillable = ['name','price', 'format'];
     public function areas(){
-        return $this->belongsToMany(Area::class, 'area_products');
+        return $this->belongsToMany(Area::class, 'area_products')->withPivot('count');
     }
 }

@@ -57,6 +57,9 @@
                                             Nombre
                                         </th>
                                         <th scope="col" class="table-th ">
+                                            Cantidad de trabajadores
+                                        </th>
+                                        <th scope="col" class="table-th ">
                                             {{ __('Creado') }}
                                         </th>
                                         <th scope="col" class="table-th w-20">
@@ -87,6 +90,9 @@
                                                         </h4>
                                                     </div>
                                                 </div>
+                                            </td>
+                                            <td class="table-td">
+                                                {{ $area->workers_count }}
                                             </td>
                                             <td class="table-td">
                                                 {{ $area->created_at->diffForHumans() }}

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Area;
+use App\Models\AreaProduct;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -148,5 +150,21 @@ class ProductController extends Controller
         $product->delete();
 
         return to_route('products.index')->with('message', 'Producto eliminado satisfactoriamente');
+    }
+
+    public function asignProduct(Request $request, Product $product)
+    {
+        $asigments = [];
+        $query = Area::query();
+        
+        $amountByArea = intval($request->amount / $query->sum("workers_count"));
+        $areas = $query->get();
+
+        foreach ($areas as $key => $value) {
+             array_push($asigments, ['product_id'=>$product->id, 'area_id' => $value->id, 'count' => $amountByArea]);
+        }
+
+        AreaProduct::insert($asigments);
+        return redirect()->route('products.index')->with('message', 'Asignacion creada existosamente');
     }
 }

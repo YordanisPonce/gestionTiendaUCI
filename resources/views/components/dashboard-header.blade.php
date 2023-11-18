@@ -47,16 +47,17 @@
 <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto inset-0 bg-slate-900/40" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog relative w-auto pointer-events-none top-1/4">
         <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-900 bg-clip-padding rounded-md outline-none text-current">
-            <form>
-                <label for="amount" class="p-4 border-b text-2xl">Nyeva asignacion</label>
+            <div for="amount" class="p-4 border-b text-xl bg-dark-500">Nueva asignacion</div>
+            <form class="flex flex-col p-8 gap-3">
                 <div class="relative">
-                    <input type="text" class="form-control p-5" placeholder="Cantidad" autofocus>
+                    <label for="amount">Introducir cantidad en existencia:</label>
+                    <input type="text" class="form-control p-5" placeholder="Cantidad" autofocus name="amount">
                 </div>
-                <button class="btn inline-flex justify-center btn-dark rounded-[25px] items-center !p-2 !px-3"
+                <button class="btn inline-flex justify-center btn-dark rounded-[25px] items-center"
                 href="{{ route('products.create') }}">
                 <iconify-icon icon="ic:round-plus" class="text-lg mr-1">
                 </iconify-icon>
-                {{ __('Creare') }}
+                {!! __('Crear asignaci&oacute;n') !!}
             </button>
             </form>
         </div>

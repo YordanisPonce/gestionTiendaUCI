@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppsController;
+use App\Http\Controllers\AsigmentController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
@@ -55,8 +56,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Product
     Route::resource('products', ProductController::class);
+    Route::controller(ProductController::class)->prefix('products')->as('products.')->group(function () {
+        Route::post('asign-product/{product}', 'asignProduct')->name('asignProduct');
+      });
+
 
         // Asigments
-        Route::resource('area-products', ProductController::class);
+        Route::resource('area-products', AsigmentController::class);
     Route::get('database-backups-download/{fileName}', [DatabaseBackupController::class, 'databaseBackupDownload'])->name('database-backups.download');
 });

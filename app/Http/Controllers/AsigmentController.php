@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AreaProduct;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class AsigmentController extends Controller
 {
@@ -39,8 +40,8 @@ class AsigmentController extends Controller
             ->paginate($perPage)
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
 
-        return view('asigments.index', [
-            'asugments' => $asigments,
+        return view('asigment.index', [
+            'asigments' => $asigments,
             'breadcrumbItems' => $breadcrumbsItems,
             'pageTitle' => 'Asignaciones'
         ]);
@@ -109,6 +110,7 @@ class AsigmentController extends Controller
      */
     public function destroy(AreaProduct $areaProduct)
     {
-        //
+        $areaProduct->delete();
+        return redirect()->back()->with('message', 'Asignacion eliminadas existosamente');
     }
 }

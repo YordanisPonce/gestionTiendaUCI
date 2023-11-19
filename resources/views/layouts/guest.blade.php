@@ -14,7 +14,7 @@
         <div class="loginwrapper">
             <div class="lg-inner-column">
                 <div class="left-column relative z-[1]">
-                    <div class="p-4 px-7 w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <div class="py-4 px-12 w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <!-- APPLICATION LOGO -->
 
                         <h4 class="w-full mb-5">
@@ -33,8 +33,8 @@
                             <script>
                                 document.write(new Date().getFullYear())
                             </script>
-                            , <a href="#">{{ __('Dashcode') }}</a>
-                            {{ __('All Rights Reserved.') }}
+                            , <a href="#">{{ config('app.name') }}</a>
+                            {{ __('Todos los derechos reservados.') }}
                         </div>
                     </div>
                 </div>

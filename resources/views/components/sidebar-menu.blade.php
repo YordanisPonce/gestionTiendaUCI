@@ -57,7 +57,7 @@
             <li>
                 <a href="{{ route('area-products.index') }}" class="navItem {{ (request()->is('area-products*')) || (request()->is('area-products*')) || (request()->is('area-products*')) || (request()->is('area-products*')) || (request()->is('area-products*')) ? 'active' : '' }}">
                     <span class="flex items-center">
-                        <iconify-icon class=" nav-icon" icon="carbon:area-custom"></iconify-icon>
+                        <iconify-icon class=" nav-icon" icon="ph:shopping-cart-simple-bold"></iconify-icon>
                         <span>{{ __('Asignaciones') }}</span>
                     </span>
                 </a>

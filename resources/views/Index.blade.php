@@ -59,7 +59,7 @@
                         <iconify-icon icon="carbon:area"></iconify-icon>
                     </div>
                     <h4 class="font-Interfont-normal text-sm text-textColor dark:text-white pb-1">
-                       Areas
+                       &Aacute;reas
                     </h4>
                     <p class="font-Intertext-xl text-black dark:text-white font-medium">
                         {{ $data['growth']['total'] }}
@@ -76,7 +76,7 @@
             {{-- Statistics Chats  --}}
             <div class="mt-8 xl:mt-0 xl:w-4/12 bg-white  dark:bg-slate-800 rounded-md w-full">
                 <h3 class="px-6 py-5 font-Interfont-normal text-black dark:text-white text-xl border-b border-b-slate-100 dark:border-b-slate-900">
-                    {{ __('Statistics') }}
+                    Estad&iacute;sticas
                 </h3>
                 <div class="overflow-hidden px-6 py-5 grid md:grid-cols-2 gap-4">
                     <div class="statisticsChartCard">
@@ -122,12 +122,12 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-            <div class="col-span-12">
+            <div class="flex-1">
                 <div class="card">
                 <div class="card-header noborder">
-                    <h4 class="card-title">Recent Orders
+                    <h4 class="card-title">
+                        Ventas
                     </h4>
                     <div>
                     <!-- BEGIN: Card Dropdown -->
@@ -168,19 +168,19 @@
                             <tr>
 
                                 <th scope="col" class=" table-th ">
-                                User
+                                Asignado por
                                 </th>
 
                                 <th scope="col" class=" table-th ">
-                                Invoice
+                                    Producto
                                 </th>
 
                                 <th scope="col" class=" table-th ">
-                                Price
+                                    &Aacute;rea
                                 </th>
 
                                 <th scope="col" class=" table-th ">
-                                Status
+                                    Fecha
                                 </th>
 
                             </tr>
@@ -212,169 +212,6 @@
 
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td class="table-td">
-                                <div class="flex items-center">
-                                    <div class="flex-none">
-                                    <div class="w-8 h-8 rounded-[100%] ltr:mr-3 rtl:ml-3">
-                                        <img src="images/users/user-2.jpg" alt="" class="w-full h-full rounded-[100%] object-cover">
-                                    </div>
-                                    </div>
-                                    <div class="flex-1 text-start">
-                                    <h4 class="text-sm font-medium text-slate-600 whitespace-nowrap">
-                                        Guy Hawkins
-                                    </h4>
-                                    </div>
-                                </div>
-                                </td>
-                                <td class="table-td">#4224</td>
-                                <td class="table-td">$78.65</td>
-                                <td class="table-td ">
-
-                                <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-warning-500
-                                        bg-warning-500">
-                                    due
-                                </div>
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="table-td">
-                                <div class="flex items-center">
-                                    <div class="flex-none">
-                                    <div class="w-8 h-8 rounded-[100%] ltr:mr-3 rtl:ml-3">
-                                        <img src="images/users/user-3.jpg" alt="" class="w-full h-full rounded-[100%] object-cover">
-                                    </div>
-                                    </div>
-                                    <div class="flex-1 text-start">
-                                    <h4 class="text-sm font-medium text-slate-600 whitespace-nowrap">
-                                        Bessie Cooper
-                                    </h4>
-                                    </div>
-                                </div>
-                                </td>
-                                <td class="table-td">#4224</td>
-                                <td class="table-td">$78.65</td>
-                                <td class="table-td ">
-
-                                <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-warning-500
-                                        bg-warning-500">
-                                    pending
-                                </div>
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="table-td">
-                                <div class="flex items-center">
-                                    <div class="flex-none">
-                                    <div class="w-8 h-8 rounded-[100%] ltr:mr-3 rtl:ml-3">
-                                        <img src="images/users/user-4.jpg" alt="" class="w-full h-full rounded-[100%] object-cover">
-                                    </div>
-                                    </div>
-                                    <div class="flex-1 text-start">
-                                    <h4 class="text-sm font-medium text-slate-600 whitespace-nowrap">
-                                        Kathryn Murphy
-                                    </h4>
-                                    </div>
-                                </div>
-                                </td>
-                                <td class="table-td">#4224</td>
-                                <td class="table-td">$38.65</td>
-                                <td class="table-td ">
-
-                                <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-danger-500
-                                        bg-danger-500">
-                                    cancled
-                                </div>
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="table-td">
-                                <div class="flex items-center">
-                                    <div class="flex-none">
-                                    <div class="w-8 h-8 rounded-[100%] ltr:mr-3 rtl:ml-3">
-                                        <img src="images/users/user-5.jpg" alt="" class="w-full h-full rounded-[100%] object-cover">
-                                    </div>
-                                    </div>
-                                    <div class="flex-1 text-start">
-                                    <h4 class="text-sm font-medium text-slate-600 whitespace-nowrap">
-                                        Darrell Steward
-                                    </h4>
-                                    </div>
-                                </div>
-                                </td>
-                                <td class="table-td">#4224</td>
-                                <td class="table-td">$178.65</td>
-                                <td class="table-td ">
-
-                                <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-primary-500
-                                        bg-primary-500">
-                                    shipped
-                                </div>
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="table-td">
-                                <div class="flex items-center">
-                                    <div class="flex-none">
-                                    <div class="w-8 h-8 rounded-[100%] ltr:mr-3 rtl:ml-3">
-                                        <img src="images/users/user-6.jpg" alt="" class="w-full h-full rounded-[100%] object-cover">
-                                    </div>
-                                    </div>
-                                    <div class="flex-1 text-start">
-                                    <h4 class="text-sm font-medium text-slate-600 whitespace-nowrap">
-                                        Darrell Steward
-                                    </h4>
-                                    </div>
-                                </div>
-                                </td>
-                                <td class="table-td">#4224</td>
-                                <td class="table-td">$74.65</td>
-                                <td class="table-td ">
-
-                                <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-danger-500
-                                        bg-danger-500">
-                                    cancled
-                                </div>
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="table-td">
-                                <div class="flex items-center">
-                                    <div class="flex-none">
-                                    <div class="w-8 h-8 rounded-[100%] ltr:mr-3 rtl:ml-3">
-                                        <img src="images/users/user-1.jpg" alt="" class="w-full h-full rounded-[100%] object-cover">
-                                    </div>
-                                    </div>
-                                    <div class="flex-1 text-start">
-                                    <h4 class="text-sm font-medium text-slate-600 whitespace-nowrap">
-                                        Esther Howard
-                                    </h4>
-                                    </div>
-                                </div>
-                                </td>
-                                <td class="table-td">#324567</td>
-                                <td class="table-td">$90.99</td>
-                                <td class="table-td ">
-
-                                <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500
-                                        bg-success-500">
-                                    paid
-                                </div>
-
-                                </td>
-                            </tr>
-
                             </tbody>
                         </table>
                         </div>

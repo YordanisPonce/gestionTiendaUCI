@@ -191,7 +191,7 @@ class HomeController extends Controller
         ];
 
         return view('Index', [
-            'pageTitle' => 'Pagina principal',
+            'pageTitle' => 'P&aacute;gina principal',
             'data' => $chartData,
             'topCustomers' => $topCustomers,
             'recentOrders' => $recentOrders,

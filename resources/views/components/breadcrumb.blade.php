@@ -2,7 +2,7 @@
 <div class="flex items-center justify-between">
     {{--Breadcrumb title start--}}
     <h5 class="text-textColor font-Inter font-medium md:text-2xl mr-4 dark:text-white mb-1 sm:mb-0">
-        {{ __($pageTitle) }}
+        {!! __($pageTitle) !!}
     </h5>
 
     {{--Breadcrumb list start--}}

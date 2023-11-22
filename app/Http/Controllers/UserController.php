@@ -47,8 +47,7 @@ class UserController extends Controller
         $perPage = $request->get('per_page', 10);
         $sort = $request->get('sort');
 
-        $users = QueryBuilder::for(User::class)
-        ->with('area')    
+        $users = QueryBuilder::for(User::class)  
         ->allowedSorts(['name', 'email','phone', 'post_code', 'city', 'country'])
             ->where('name', 'like', "%$q%")
             ->orWhere('email', 'like', "%$q%")

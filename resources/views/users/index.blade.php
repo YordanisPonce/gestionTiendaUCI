@@ -55,9 +55,6 @@
                                             {{ __('Email') }}
                                         </th>
                                         <th scope="col" class="table-th ">
-                                            &Aacute;rea
-                                        </th>
-                                        <th scope="col" class="table-th ">
                                             {{ __('Verified') }}
                                         </th>
                                         <th scope="col" class="table-th w-20">
@@ -87,9 +84,6 @@
                                         </td>
                                         <td class="table-td">
                                             {{ $user->email }}
-                                        </td>
-                                        <td class="table-td">
-                                            {{ $user->area->name }}
                                         </td>
                                         <td class="table-td">
                                             @if($user->email_verified_at)

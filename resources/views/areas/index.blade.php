@@ -160,7 +160,7 @@
                 event.preventDefault();
                 let form = document.getElementById(formId);
                 Swal.fire({
-                    title: '@lang('Are you sure ? ')',
+                    title: "¿Desea ejecutar esta opración?",
                     icon: 'question',
                     showDenyButton: true,
                     confirmButtonText: '@lang('Delete ')',

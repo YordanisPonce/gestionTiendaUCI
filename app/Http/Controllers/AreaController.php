@@ -24,7 +24,7 @@ class AreaController extends Controller
     {
         $breadcrumbsItems = [
             [
-                'name' => 'Areas',
+                'name' => 'Áreas',
                 'url' => route('areas.index'),
                 'active' => true
             ],
@@ -44,7 +44,7 @@ class AreaController extends Controller
         return view('areas.index', [
             'areas' => $areas,
             'breadcrumbItems' => $breadcrumbsItems,
-            'pageTitle' => 'Areas'
+            'pageTitle' => 'Áreas'
         ]);
     }
 
@@ -58,7 +58,7 @@ class AreaController extends Controller
 
         $breadcrumbsItems = [
             [
-                'name' => 'Areas',
+                'name' => 'Áreas',
                 'url' => route('areas.index'),
                 'active' => false
             ],
@@ -71,7 +71,7 @@ class AreaController extends Controller
 
         return view('areas.create', [
             'breadcrumbItems' => $breadcrumbsItems,
-            'pageTitle' => 'Create area'
+            'pageTitle' => 'Crear área'
         ]);
     }
 
@@ -98,7 +98,7 @@ class AreaController extends Controller
     {
         $breadcrumbsItems = [
             [
-                'name' => 'Areas',
+                'name' => 'Áreas',
                 'url' => route('areas.index'),
                 'active' => true
             ],
@@ -140,7 +140,7 @@ class AreaController extends Controller
     {
         $breadcrumbsItems = [
             [
-                'name' => 'areas',
+                'name' => 'Áreas',
                 'url' => route('areas.index'),
                 'active' => false
             ],
@@ -154,7 +154,7 @@ class AreaController extends Controller
         return view('areas.edit', [
             'area' => $area,
             'breadcrumbItems' => $breadcrumbsItems,
-            'pageTitle' => 'Editar area',
+            'pageTitle' => 'Editar área',
         ]);
     }
 

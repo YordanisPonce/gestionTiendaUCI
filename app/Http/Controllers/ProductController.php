@@ -26,7 +26,7 @@ class ProductController extends Controller
     {
         $breadcrumbsItems = [
             [
-                'name' => 'Products',
+                'name' => 'Productos',
                 'url' => route('products.index'),
                 'active' => true
             ],
@@ -60,7 +60,7 @@ class ProductController extends Controller
 
         $breadcrumbsItems = [
             [
-                'name' => 'Products',
+                'name' => 'Productos',
                 'url' => route('products.index'),
                 'active' => false
             ],
@@ -110,7 +110,7 @@ class ProductController extends Controller
     {
         $breadcrumbsItems = [
             [
-                'name' => 'products',
+                'name' => 'Productos',
                 'url' => route('products.index'),
                 'active' => false
             ],

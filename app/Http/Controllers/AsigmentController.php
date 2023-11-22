@@ -111,6 +111,6 @@ class AsigmentController extends Controller
     public function destroy(AreaProduct $areaProduct)
     {
         $areaProduct->delete();
-        return redirect()->back()->with('message', 'Asignacion eliminadas existosamente');
+        return redirect()->back()->with('message', 'Asignacion eliminada existosamente');
     }
 }

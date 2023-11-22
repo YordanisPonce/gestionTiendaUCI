@@ -32,12 +32,7 @@ class UserController extends Controller
     {
         $breadcrumbsItems = [
             [
-                'name' => 'Settings',
-                'url' => '/general-settings',
-                'active' => false
-            ],
-            [
-                'name' => 'Users',
+                'name' => 'Usuarios',
                 'url' => route('users.index'),
                 'active' => true
             ],
@@ -74,12 +69,12 @@ class UserController extends Controller
     {
         $breadcrumbsItems = [
             [
-                'name' => 'Users',
+                'name' => 'Usuarios',
                 'url' => route('users.index'),
                 'active' => false
             ],
             [
-                'name' => 'Create',
+                'name' => 'Crear',
                 'url' => route('users.create'),
                 'active' => true
             ],
@@ -89,7 +84,7 @@ class UserController extends Controller
         return view('users.create', [
             'roles' => $roles,
             'breadcrumbItems' => $breadcrumbsItems,
-            'pageTitle' => 'Create User'
+            'pageTitle' => 'Crear Usuario'
         ]);
     }
 
@@ -123,12 +118,12 @@ class UserController extends Controller
     {
         $breadcrumbsItems = [
             [
-                'name' => 'Users',
+                'name' => 'Usuarios',
                 'url' => route('users.index'),
                 'active' => false
             ],
             [
-                'name' => 'Show',
+                'name' => 'Mostrar',
                 'url' => '#',
                 'active' => true
             ],
@@ -137,7 +132,7 @@ class UserController extends Controller
         return view('users.show', [
             'user' => $user,
             'breadcrumbItems' => $breadcrumbsItems,
-            'pageTitle' => 'Show User',
+            'pageTitle' => 'Mostrar Usuarios',
         ]);
     }
 
@@ -152,12 +147,12 @@ class UserController extends Controller
     {
         $breadcrumbsItems = [
             [
-                'name' => 'Users',
+                'name' => 'Usuarios',
                 'url' => route('users.index'),
                 'active' => false
             ],
             [
-                'name' => 'Edit',
+                'name' => 'Editar',
                 'url' => '#',
                 'active' => true
             ],
@@ -169,7 +164,7 @@ class UserController extends Controller
             'user' => $user,
             'roles' => $roles,
             'breadcrumbItems' => $breadcrumbsItems,
-            'pageTitle' => 'Edit User',
+            'pageTitle' => 'Editar Usuario',
         ]);
     }
 
@@ -188,7 +183,7 @@ class UserController extends Controller
 
         $user->syncRoles([$request->validated(['role'])]);
 
-        return redirect()->route('users.index')->with('message', 'User updated successfully');
+        return redirect()->route('users.index')->with('message', 'Usuario actualizado exitosamente');
     }
 
     /**
@@ -202,6 +197,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return to_route('users.index')->with('message', 'User deleted successfully');
+        return to_route('users.index')->with('message', 'Usuario eliminado exitosamente');
     }
 }

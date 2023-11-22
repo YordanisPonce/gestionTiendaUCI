@@ -8,6 +8,8 @@ use App\Models\AreaProduct;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\QueryBuilder\QueryBuilder;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -157,11 +159,11 @@ class ProductController extends Controller
         $asigments = [];
         $query = Area::query();
         
-        $amountByArea = intval($request->amount / $query->sum("workers_count"));
+        $amountByArea = intval($request->amount / ($query->sum("workers_count") ?: 1));
         $areas = $query->get();
 
         foreach ($areas as $key => $value) {
-             array_push($asigments, ['product_id'=>$product->id, 'area_id' => $value->id, 'count' => $amountByArea]);
+             array_push($asigments, ['product_id'=>$product->id, 'area_id' => $value->id, 'created_at' => Carbon::now(), 'count' => $amountByArea, 'user_id' => Auth::user()->id]);
         }
 
         AreaProduct::insert($asigments);

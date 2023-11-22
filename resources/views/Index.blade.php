@@ -182,11 +182,13 @@
                                 <th scope="col" class=" table-th ">
                                     Fecha
                                 </th>
-
+                                <th scope="col" class=" table-th ">
+                                    Cantidad
+                                </th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
-
+                            @forelse ($assigments as $item)
                             <tr>
                                 <td class="table-td">
                                 <div class="flex items-center">
@@ -197,22 +199,38 @@
                                     </div>
                                     <div class="flex-1 text-start">
                                     <h4 class="text-sm font-medium text-slate-600 whitespace-nowrap">
-                                        Esther Howard
+                                       {{$item->user->name}}
                                     </h4>
                                     </div>
                                 </div>
                                 </td>
-                                <td class="table-td">#324567</td>
-                                <td class="table-td">$90.99</td>
+                                <td class="table-td">{{$item->product->name}}</td>
+                                <td class="table-td">{{$item->area->name}}</td>
+                                <td class="table-td">{{"No definida"}}</td>
                                 <td class="table-td ">
-                                <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px] bg-opacity-25 text-success-500
-                                        bg-success-500">
-                                    paid
+                                <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px]">
+                                    {{$item->amount}}
                                 </div>
 
                                 </td>
                             </tr>
+
+                            @empty
+
+                            <tr>
+                                <td colspan="5" class="text-center p-5">No existen ventas para mostrar</td>
+                            </tr>
+                            @endforelse
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                   <div class="flex justify-end pr-3 pt-3">
+                                    <span>{{$assigments->links()}}</span>
+                                   </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                         </div>
                     </div>

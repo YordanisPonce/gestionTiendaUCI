@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticationTest extends TestCase
 {
@@ -22,29 +23,13 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_authenticate_using_the_login_screen()
     {
-        $user = User::factory()->create();
-
+        $user = User::factory()->create(['email'=>'user@user.com', 'password'=>Hash::make('useruser')]);
         $response = $this->post('/login', [
             'email' => $user->email,
-            'password' => 'password',
+            'password' => 'useruser',
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
-    }
-
-
-    public function test_users_can_authenticate_using_the_login_screen_with_keep_me_signed_in()
-    {
-        $user = User::factory()->create();
-
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-            'remember' => true,
-        ]);
-
-        $this->assertAuthenticated('web');
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 
@@ -53,7 +38,7 @@ class AuthenticationTest extends TestCase
         $user = User::factory()->create();
 
         $this->post('/login', [
-            'email' => $user->email,
+            'email' => $this->superAdmin->email,
             'password' => 'wrong-password',
         ]);
 

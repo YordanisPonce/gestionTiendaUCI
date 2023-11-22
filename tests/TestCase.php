@@ -23,7 +23,7 @@ abstract class TestCase extends BaseTestCase
 
         $this->admin = User::where('email', 'admin@dashcode.com')->firstOrFail();
 
-        $this->superAdmin = User::where('email', 'superadmin@dashcode.com')->firstOrFail();
+        $this->superAdmin = User::where('email', 'admin@admin.com')->firstOrFail();
     }
 
 

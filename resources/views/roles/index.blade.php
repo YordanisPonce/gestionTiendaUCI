@@ -120,8 +120,8 @@
                 title: "¿Desea ejecutar esta opración?",
                 icon : 'question',
                 showDenyButton: true,
-                confirmButtonText: '@lang('Delete ')',
-                denyButtonText: '@lang(' Cancel ')',
+                confirmButtonText: "Aceptar",
+                denyButtonText: "Cancelar",
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit();

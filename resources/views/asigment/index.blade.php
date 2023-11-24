@@ -33,7 +33,7 @@
                 </div>
                 <div class="justify-center flex flex-wrap sm:flex items-center lg:justify-end gap-3">
                     <div class="relative w-full sm:w-auto flex items-center">
-                        <form id="searchForm" method="get" action="{{ route('products.index') }}">
+                        <form id="searchForm" method="get" action="{{ route('area-products.index') }}">
                             <input name="q" type="text"
                                 class="inputField pl-8 p-2 border border-slate-200 dark:border-slate-700 rounded-md dark:bg-slate-900"
                                 placeholder="Search" value="{{ request()->q }}">

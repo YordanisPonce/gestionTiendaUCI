@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AreaProduct;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -37,6 +38,12 @@ class AsigmentController extends Controller
         $asigments = QueryBuilder::for(AreaProduct::class)
             ->allowedSorts(['count'])
             ->with(['area', 'product'])
+            ->where(function ($query) use ($q) {
+                if ($q) {
+                    $ids = Product::where('name', 'like', $q . '%')->get(['id'])->pluck('id')->toArray();
+                    $query->whereIn('product_id', $ids);
+                }
+            })
             ->latest()
             ->paginate($perPage)
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);

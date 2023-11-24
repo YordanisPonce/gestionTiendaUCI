@@ -9,7 +9,8 @@ use Spatie\QueryBuilder\QueryBuilder;
 class AsigmentController extends Controller
 {
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->authorizeResource(AreaProduct::class, 'area_product');
     }
 
@@ -20,7 +21,7 @@ class AsigmentController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $breadcrumbsItems = [
             [
                 'name' => 'Asignaciones',
@@ -35,7 +36,7 @@ class AsigmentController extends Controller
 
         $asigments = QueryBuilder::for(AreaProduct::class)
             ->allowedSorts(['count'])
-            ->with(['area','product'])
+            ->with(['area', 'product'])
             ->latest()
             ->paginate($perPage)
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
@@ -99,7 +100,11 @@ class AsigmentController extends Controller
      */
     public function update(Request $request, AreaProduct $areaProduct)
     {
-        //
+        if (!$request->amount) {
+            return redirect()->back();
+        }
+        $areaProduct->update(['count' => $request->amount]);
+        return redirect()->back()->with('message', 'Asignacion actualizada existosamente');
     }
 
     /**

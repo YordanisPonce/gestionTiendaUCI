@@ -191,15 +191,18 @@ class HomeController extends Controller
             ],
         ];
 
-        $assigments = AreaProduct::with(['product','area', 'user'])->select(DB::raw('sum(count) as amount'), 'product_id', 'area_id',  'user_id')
-        ->groupBy(['product_id', 'area_id', 'user_id'])
-        ->paginate(5);
+        $assigments = AreaProduct::with(['product', 'area', 'user'])->select(DB::raw('sum(count) as amount'), 'product_id', 'area_id',  'user_id')
+            ->groupBy(['product_id', 'area_id', 'user_id' ])
+            ->paginate(5);
+
+        $products = AreaProduct::with('product')->select(DB::raw('sum(count) as amount'), 'product_id')->groupBy('product_id')->paginate(5);
         return view('Index', [
             'pageTitle' => 'P&aacute;gina principal',
             'data' => $chartData,
             'topCustomers' => $topCustomers,
             'recentOrders' => $recentOrders,
-            'assigments' => $assigments
+            'assigments' => $assigments,
+            'products' => $products,
         ]);
     }
 

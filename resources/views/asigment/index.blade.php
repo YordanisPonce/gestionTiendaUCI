@@ -18,7 +18,7 @@
                 <div class="justify-end flex gap-3 items-center flex-wrap">
                     {{-- Create Button start --}}
                     {{--  @can('product create') --}}
-                   {{--  <a class="btn inline-flex justify-center btn-dark rounded-[25px] items-center !p-2 !px-3"
+                    {{--  <a class="btn inline-flex justify-center btn-dark rounded-[25px] items-center !p-2 !px-3"
                         href="{{ route('area-products.create') }}">
                         <iconify-icon icon="ic:round-plus" class="text-lg mr-1">
                         </iconify-icon>
@@ -72,9 +72,9 @@
                                     @forelse ($asigments as $asigment)
                                         <tr>
                                             <td class="table-td">
-                                                # {{ $asigment->id }}
+                                                # {{ $loop->iteration }}
                                             </td>
-                                           
+
                                             <td class="table-td">
                                                 {{ $asigment->product->name }}
                                             </td>
@@ -85,6 +85,52 @@
                                                 {{ $asigment->count }}
                                             </td>
                                             <td class="table-td">
+                                                <div class="flex gap-2">
+
+                                                    <div class="flex space-x-3 rtl:space-x-reverse">
+                                                        <button class="action-btn" data-bs-toggle="modal"
+                                                            data-bs-target="#searchModal{{ $asigment->id }}">
+                                                            <iconify-icon icon="material-symbols:edit"></iconify-icon>
+                                                        </button>
+                                                        <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto inset-0 bg-slate-900/40"
+                                                            id="searchModal{{ $asigment->id }}" tabindex="-1"
+                                                            aria-labelledby="searchModalLabel" aria-hidden="true">
+                                                            <div
+                                                                class="modal-dialog relative w-auto pointer-events-none top-1/4">
+                                                                <div
+                                                                    class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-900 bg-clip-padding rounded-md outline-none text-current">
+                                                                    <div for="amount"
+                                                                        class="p-4 border-b text-xl bg-dark-500">
+                                                                        Actualizar asignaci&oacute;n</div>
+                                                                    <form class="flex flex-col p-8 gap-3"
+                                                                        action="{{ route('area-products.update', $asigment) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <div class="relative">
+                                                                            <label for="amount">Nueva
+                                                                                asignacion:</label>
+                                                                            <input type="text"
+                                                                                class="form-control p-5"
+                                                                                placeholder="Cantidad" autofocus
+                                                                                name="amount"
+                                                                                value="{{ $asigment->count }}">
+                                                                        </div>
+                                                                        <button
+                                                                            class="btn inline-flex justify-center btn-dark rounded-[25px] items-center"
+                                                                            href="{{ route('products.create') }}">
+                                                                            <iconify-icon icon="material-symbols:edit"
+                                                                                class="text-lg mr-1">
+                                                                            </iconify-icon>
+                                                                            {!! __('Actualizar asignaci&oacute;n') !!}
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
                                                     {{-- view --}}
                                                     @can('product show')
                                                         <a class="action-btn"
@@ -93,6 +139,11 @@
                                                         </a>
                                                     @endcan
                                                     {{-- Edit --}}
+
+                                                    <a class="action-btn"
+                                                        href="{{ route('area-products.edit', $asigment) }}">
+                                                        <iconify-icon icon="heroicons:pencil-square"></iconify-icon>
+                                                    </a>
                                                     {{--          @endcan --}}
                                                     {{-- delete --}}
                                                     {{--  @can('product delete') --}}
@@ -107,6 +158,7 @@
                                                         </a>
                                                     </form>
                                                     {{--      @endcan --}}
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -141,7 +193,7 @@
                     icon: 'question',
                     showDenyButton: true,
                     confirmButtonText: "Aceptar",
-                denyButtonText: "Cancelar",
+                    denyButtonText: "Cancelar",
                 }).then((result) => {
                     if (result.isConfirmed) {
                         form.submit();

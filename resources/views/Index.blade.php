@@ -1,11 +1,12 @@
 <x-app-layout>
     <div class="space-y-8">
         <div class="block sm:flex items-center justify-between mb-6">
-            <x-breadcrumb :pageTitle="$pageTitle"/>
+            <x-breadcrumb :pageTitle="$pageTitle" />
         </div>
         {{-- Dashboard Top Card --}}
         <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-7">
-            <div class="dasboardCard bg-white dark:bg-slate-800 rounded-md px-5 py-4 flex items-center justify-between bg-center bg-cover bg-no-repeat" style="background-image:url('{{ asset('/images/ecommerce-wid-bg.png') }}')">
+            <div class="dasboardCard bg-white dark:bg-slate-800 rounded-md px-5 py-4 flex items-center justify-between bg-center bg-cover bg-no-repeat"
+                style="background-image:url('{{ asset('/images/ecommerce-wid-bg.png') }}')">
                 <div class="w-56 ">
                     <h3 class="font-Inter font-normal text-white text-lg">
                         {{ __('Buenas noches') }},
@@ -21,7 +22,7 @@
             <div class="bg-white dark:bg-slate-800 rounded-md px-5 py-4 ">
                 <div class="pl-14 relative">
                     <div
-                            class="w-10 h-10 rounded-full bg-sky-100 text-sky-800 text-base flex items-center justify-center absolute left-0 top-2">
+                        class="w-10 h-10 rounded-full bg-sky-100 text-sky-800 text-base flex items-center justify-center absolute left-0 top-2">
                         <iconify-icon icon="ph:shopping-cart-simple-bold"></iconify-icon>
                     </div>
                     <h4 class="font-Interfont-normal text-sm text-textColor dark:text-white pb-1">
@@ -38,7 +39,7 @@
             <div class="bg-white dark:bg-slate-800 rounded-md px-5 py-4 ">
                 <div class="pl-14 relative">
                     <div
-                            class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-800 text-base flex items-center justify-center absolute left-0 top-2">
+                        class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-800 text-base flex items-center justify-center absolute left-0 top-2">
                         <iconify-icon icon="fluent-mdl2:product-variant"></iconify-icon>
                     </div>
                     <h4 class="font-Interfont-normal text-sm text-textColor dark:text-white pb-1">
@@ -55,11 +56,11 @@
             <div class="bg-white dark:bg-slate-800 rounded-md px-5 py-4 ">
                 <div class="pl-14 relative">
                     <div
-                            class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-800 text-base flex items-center justify-center absolute left-0 top-2">
+                        class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-800 text-base flex items-center justify-center absolute left-0 top-2">
                         <iconify-icon icon="carbon:area"></iconify-icon>
                     </div>
                     <h4 class="font-Interfont-normal text-sm text-textColor dark:text-white pb-1">
-                       &Aacute;reas
+                        &Aacute;reas
                     </h4>
                     <p class="font-Intertext-xl text-black dark:text-white font-medium">
                         {{ $data['growth']['total'] }}
@@ -72,171 +73,168 @@
         </div>
 
         {{-- Dashboard Chart --}}
-        <div class="xl:flex gap-y-8 xl:gap-8 overflow-hidden">
+        <div class="xl:flex gap-y-8 xl:gap-8 overflow-hidden h-fit">
             {{-- Statistics Chats  --}}
-            <div class="mt-8 xl:mt-0 xl:w-4/12 bg-white  dark:bg-slate-800 rounded-md w-full">
-                <h3 class="px-6 py-5 font-Interfont-normal text-black dark:text-white text-xl border-b border-b-slate-100 dark:border-b-slate-900">
-                    Estad&iacute;sticas
+            <div class="mt-8 xl:mt-0 xl:w-4/12 bg-white  dark:bg-slate-800 rounded-md w-full flex flex-col h-fit">
+                <h3
+                    class="px-6 py-5 font-Interfont-normal text-black dark:text-white text-xl border-b border-b-slate-100 dark:border-b-slate-900">
+                    Total de productos
                 </h3>
-                <div class="overflow-hidden px-6 py-5 grid md:grid-cols-2 gap-4">
-                    <div class="statisticsChartCard">
-                        <div>
-                            <h5 class="text-sm text-slate-600 dark:text-slate-300 mb-[6px]"> {{ __('Orders') }} </h5>
-                            <h3 class="text-lg text-slate-900 dark:text-slate-300 font-medium mb-[6px]">{{ $data['lastWeekOrder']['total'] }}</h3>
-                            <p class="font-normal text-xs text-slate-600 dark:text-slate-300">
-                                <span class="text-red-400">
-                                    {{ $data['lastWeekOrder']['preSymbol'].' '.$data['lastWeekOrder']['percentage'] }}%
-                                </span>
-                                {{ __('From last week.') }}
-                            </p>
-                        </div>
-                        <div id="columnChart" class="mt-1"></div>
-                    </div>
-                    <div class="statisticsChartCard">
-                        <div>
-                            <h5 class="text-sm text-slate-600 dark:text-slate-300 mb-[6px]">{{ __('Profit') }}</h5>
-                            <h3 class="text-lg text-slate-900 dark:text-slate-300 font-medium mb-[6px]">
-                                {{ $data['lastWeekProfit']['total'] }}
-                            </h3>
-                            <p class="font-normal text-xs text-slate-600 dark:text-slate-300">
-                                <span class="text-indigo-400">
-                                   {{ $data['lastWeekProfit']['preSymbol'].' '.$data['lastWeekProfit']['percentage'] }}%
-                                </span>
-                                {{ __('From last week.') }}
-                            </p>
-                        </div>
-                        <div id="lineChart" class="mt-1"></div>
-                    </div>
-                    <div class="statisticsChartCard py-4 md:col-span-2 md:flex items-center justify-between">
-                        <div>
-                            <h5 class="text-sm text-slate-600 dark:text-slate-300 mb-[6px]">{{ $data['lastWeekOverview']['title'] }}</h5>
-                            <h3 class="text-lg text-slate-900 dark:text-slate-300 font-medium mb-[6px]">{{ $data['lastWeekOverview']['amount'] }}</h3>
-                            <p class="font-normal text-xs text-slate-600 dark:text-slate-300">
-                                <span class="text-indigo-400">
-                                    {{ $data['lastWeekOverview']['percentage'] }}%
-                                </span>
-                                {{ __('From last Week') }}
-                            </p>
-                        </div>
-                        <div id="donutChart"></div>
-                    </div>
+                <div @class(['overflow-hidden'])>
+                    @isset($products)
+                        @forelse ($products as $item)
+                            <div
+                                class="flex justify-between border-b border-b-slate-200 p-4 text-gray dark:text-white items-center w-full">
+                                <p class="flex flex-col flex-1">
+                                    <span>
+                                        {{ $item->product->name }}
+                                    </span>
+                                    <small class="text-slate-400">
+                                        {{ $item->product->format }}
+                                    </small>
+                                </p>
+                                <small>
+                                    <span>Total: {{ $item->amount }}</span>
+                                </small>
+                            </div>
+                        @empty
+                            <p class="text-slate-400 mt-12 w-full text-center">Esta secci&oacute;n esta vac&iacute;a</p>
+                        @endforelse
+                    @endisset
+                </div>
+                <div class="mt-auto p-3">
+                  @if (count($products) > 5)
+                  {{ $products->links() }}
+                  @endif
                 </div>
             </div>
 
             <div class="flex-1">
                 <div class="card">
-                <div class="card-header noborder">
-                    <h4 class="card-title">
-                        Ventas
-                    </h4>
-                    <div>
-                    <!-- BEGIN: Card Dropdown -->
-                    <div class="relative">
-                        <div class="dropdown relative">
-                        <button class="text-xl text-center block w-full " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="text-lg inline-flex h-6 w-6 flex-col items-center justify-center border border-slate-200 dark:border-slate-700 rounded dark:text-slate-400">
-                                <iconify-icon icon="heroicons-outline:dots-horizontal"></iconify-icon>
-                            </span>
-                        </button>
-                        <ul class=" dropdown-menu min-w-[120px] absolute text-sm text-slate-700 dark:text-white hidden bg-white dark:bg-slate-700 shadow z-[2] overflow-hidden list-none text-left rounded-lg mt-1 m-0 bg-clip-padding border-none">
-                            <li>
-                            <a href="#" class="text-slate-600 dark:text-white block font-Inter font-normal px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                Last 28 Days</a>
-                            </li>
-                            <li>
-                            <a href="#" class="text-slate-600 dark:text-white block font-Inter font-normal px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                Last Month</a>
-                            </li>
-                            <li>
-                            <a href="#" class="text-slate-600 dark:text-white block font-Inter font-normal px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
-                                Last Year</a>
-                            </li>
-                        </ul>
+                    <div class="card-header noborder">
+                        <h4 class="card-title">
+                            Ventas
+                        </h4>
+                        <div>
+                            <!-- BEGIN: Card Dropdown -->
+                            <div class="relative">
+                                <div class="dropdown relative">
+                                    <button class="text-xl text-center block w-full " type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span
+                                            class="text-lg inline-flex h-6 w-6 flex-col items-center justify-center border border-slate-200 dark:border-slate-700 rounded dark:text-slate-400">
+                                            <iconify-icon icon="heroicons-outline:dots-horizontal"></iconify-icon>
+                                        </span>
+                                    </button>
+                                    <ul
+                                        class=" dropdown-menu min-w-[120px] absolute text-sm text-slate-700 dark:text-white hidden bg-white dark:bg-slate-700 shadow z-[2] overflow-hidden list-none text-left rounded-lg mt-1 m-0 bg-clip-padding border-none">
+                                        <li>
+                                            <a href="#"
+                                                class="text-slate-600 dark:text-white block font-Inter font-normal px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
+                                                Last 28 Days</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                                class="text-slate-600 dark:text-white block font-Inter font-normal px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
+                                                Last Month</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                                class="text-slate-600 dark:text-white block font-Inter font-normal px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-600 dark:hover:text-white">
+                                                Last Year</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- END: Card Droopdown -->
                         </div>
                     </div>
-                    <!-- END: Card Droopdown -->
-                    </div>
-                </div>
-                <div class="card-body p-6">
-                    <!-- BEGIN: Order table -->
+                    <div class="card-body p-6">
+                        <!-- BEGIN: Order table -->
 
-                    <div class="overflow-x-auto -mx-6">
-                    <div class="inline-block min-w-full align-middle">
-                        <div class="overflow-hidden ">
-                        <table class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
-                            <thead class=" bg-slate-200 dark:bg-slate-700">
-                            <tr>
+                        <div class="overflow-x-auto -mx-6">
+                            <div class="inline-block min-w-full align-middle">
+                                <div class="overflow-hidden ">
+                                    <table
+                                        class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700">
+                                        <thead class=" bg-slate-200 dark:bg-slate-700">
+                                            <tr>
 
-                                <th scope="col" class=" table-th ">
-                                Asignado por
-                                </th>
+                                                <th scope="col" class=" table-th ">
+                                                    Asignado por
+                                                </th>
 
-                                <th scope="col" class=" table-th ">
-                                    Producto
-                                </th>
+                                                <th scope="col" class=" table-th ">
+                                                    Producto
+                                                </th>
 
-                                <th scope="col" class=" table-th ">
-                                    &Aacute;rea
-                                </th>
+                                                <th scope="col" class=" table-th ">
+                                                    &Aacute;rea
+                                                </th>
 
-                                <th scope="col" class=" table-th ">
-                                    Fecha
-                                </th>
-                                <th scope="col" class=" table-th ">
-                                    Cantidad
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
-                            @forelse ($assigments as $item)
-                            <tr>
-                                <td class="table-td">
-                                <div class="flex items-center">
-                                    <div class="flex-none">
-                                    <div class="w-8 h-8 rounded-[100%] ltr:mr-3 rtl:ml-3">
-                                        <img src="images/users/user-1.jpg" alt="" class="w-full h-full rounded-[100%] object-cover">
-                                    </div>
-                                    </div>
-                                    <div class="flex-1 text-start">
-                                    <h4 class="text-sm font-medium text-slate-600 whitespace-nowrap">
-                                       {{$item->user->name}}
-                                    </h4>
-                                    </div>
+                                                <th scope="col" class=" table-th ">
+                                                    Fecha
+                                                </th>
+                                                <th scope="col" class=" table-th ">
+                                                    Cantidad
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody
+                                            class="bg-white divide-y divide-slate-100 dark:bg-slate-800 dark:divide-slate-700">
+                                            @forelse ($assigments as $item)
+                                                <tr>
+                                                    <td class="table-td">
+                                                        <div class="flex items-center">
+                                                            <div class="flex-none">
+                                                                <div class="w-8 h-8 rounded-[100%] ltr:mr-3 rtl:ml-3">
+                                                                    <img src="images/users/user-1.jpg" alt=""
+                                                                        class="w-full h-full rounded-[100%] object-cover">
+                                                                </div>
+                                                            </div>
+                                                            <div class="flex-1 text-start">
+                                                                <h4
+                                                                    class="text-sm font-medium text-slate-600 whitespace-nowrap">
+                                                                    {{ $item->user->name }}
+                                                                </h4>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="table-td">{{ $item->product->name }}</td>
+                                                    <td class="table-td">{{ $item->area->name }}</td>
+                                                    <td class="table-td">{{ 'No definida' }}</td>
+                                                    <td class="table-td ">
+                                                        <div
+                                                            class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px]">
+                                                            {{ $item->amount }}
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+
+                                            @empty
+
+                                                <tr>
+                                                    <td colspan="5" class="text-center p-5">No existen ventas para
+                                                        mostrar</td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <div class="flex justify-end pr-3 pt-3">
+                                                        <span>{{ $assigments->links() }}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
-                                </td>
-                                <td class="table-td">{{$item->product->name}}</td>
-                                <td class="table-td">{{$item->area->name}}</td>
-                                <td class="table-td">{{"No definida"}}</td>
-                                <td class="table-td ">
-                                <div class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px]">
-                                    {{$item->amount}}
-                                </div>
-
-                                </td>
-                            </tr>
-
-                            @empty
-
-                            <tr>
-                                <td colspan="5" class="text-center p-5">No existen ventas para mostrar</td>
-                            </tr>
-                            @endforelse
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="5">
-                                   <div class="flex justify-end pr-3 pt-3">
-                                    <span>{{$assigments->links()}}</span>
-                                   </div>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                            </div>
                         </div>
+                        <!-- END: Order Table -->
                     </div>
-                    </div>
-                    <!-- END: Order Table -->
-                </div>
                 </div>
             </div>
         </div>
@@ -244,12 +242,10 @@
     </div>
     @push('scripts')
         <script type="module">
-
             {{-- Total Revenue Report Chart start --}}
             {{-- Chart Type: Bar --}}
             let revenueReportChartConfig = {
-                series: [
-                    {
+                series: [{
                         name: '{{ $data['revenueReport']['revenue']['title'] }}',
                         data: {{ Js::from($data['revenueReport']['revenue']['data']) }},
                     },
@@ -341,7 +337,7 @@
                 },
                 tooltip: {
                     y: {
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return "$ " + val + " thousands";
                         },
                     },
@@ -353,23 +349,21 @@
                     strokeDashArray: 10,
                     position: "back",
                 },
-                responsive: [
-                    {
-                        breakpoint: 600,
-                        options: {
-                            legend: {
-                                position: "bottom",
-                                offsetY: 0,
-                                horizontalAlign: "center",
-                            },
-                            plotOptions: {
-                                bar: {
-                                    columnWidth: "80%",
-                                },
+                responsive: [{
+                    breakpoint: 600,
+                    options: {
+                        legend: {
+                            position: "bottom",
+                            offsetY: 0,
+                            horizontalAlign: "center",
+                        },
+                        plotOptions: {
+                            bar: {
+                                columnWidth: "80%",
                             },
                         },
                     },
-                ],
+                }, ],
             };
             const revenueReportSelector = document.querySelector("#barChartOne");
             const chartDelay = setTimeout(delayChart, 50);
@@ -448,11 +442,9 @@
                     },
                     categories: {{ Js::from($data['revenue']['year']) }},
                 },
-                series: [
-                    {
-                        data: {{ Js::from($data['revenue']['data']) }},
-                    },
-                ],
+                series: [{
+                    data: {{ Js::from($data['revenue']['data']) }},
+                }, ],
             };
             const revenueChartSelector = document.querySelector("#EChart")
             const revenueChart = new ApexCharts(
@@ -526,11 +518,9 @@
                     },
                     categories: {{ Js::from($data['productSold']['year']) }},
                 },
-                series: [
-                    {
-                        data: {{ Js::from($data['productSold']['quantity']) }},
-                    },
-                ],
+                series: [{
+                    data: {{ Js::from($data['productSold']['quantity']) }},
+                }, ],
             };
             const productSalesChartSelector = document.querySelector("#EChart2")
             const productSalesChart = new ApexCharts(
@@ -606,11 +596,9 @@
                     },
                     categories: {{ Js::from($data['growth']['year']) }},
                 },
-                series: [
-                    {
-                        data: {{ Js::from($data['growth']['perYearRate']) }},
-                    },
-                ],
+                series: [{
+                    data: {{ Js::from($data['growth']['perYearRate']) }},
+                }, ],
             };
             const growthChartSelector = document.querySelector("#EChart3");
             const growthChart = new ApexCharts(
@@ -623,12 +611,10 @@
             {{-- Order Last week chart --}}
             {{-- Chart Type: bar --}}
             let lastWeekOrderChartConfig = {
-                series: [
-                    {
-                        name: {{ Js::from($data['lastWeekOrder']['name']) }},
-                        data: {{ Js::from($data['lastWeekOrder']['data']) }},
-                    },
-                ],
+                series: [{
+                    name: {{ Js::from($data['lastWeekOrder']['name']) }},
+                    data: {{ Js::from($data['lastWeekOrder']['data']) }},
+                }, ],
                 chart: {
                     type: "bar",
                     height: 50,
@@ -668,7 +654,7 @@
                 },
                 tooltip: {
                     y: {
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return "$ " + val + "k";
                         },
                     },
@@ -705,12 +691,10 @@
             {{-- Profit Last week chart --}}
             {{-- Chart Type: line --}}
             let lastWeekProfitChartConfig = {
-                series: [
-                    {
-                        name: {{ Js::from($data['lastWeekProfit']['name']) }},
-                        data: {{ Js::from($data['lastWeekProfit']['data']) }},
-                    },
-                ],
+                series: [{
+                    name: {{ Js::from($data['lastWeekProfit']['name']) }},
+                    data: {{ Js::from($data['lastWeekProfit']['data']) }},
+                }, ],
                 chart: {
                     height: 50,
                     toolbar: {
@@ -811,16 +795,14 @@
                         },
                     },
                 },
-                responsive: [
-                    {
-                        breakpoint: 480,
-                        options: {
-                            legend: {
-                                position: "bottom",
-                            },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        legend: {
+                            position: "bottom",
                         },
                     },
-                ],
+                }, ],
             };
             const lastWeekOverviewChartSelector = document.querySelector("#donutChart")
             const lastWeekOverviewChart = new ApexCharts(

@@ -150,7 +150,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-
+        AreaProduct::where('product_id', $product->id)->delete();
         return to_route('products.index')->with('message', 'Producto eliminado satisfactoriamente');
     }
 
@@ -159,11 +159,11 @@ class ProductController extends Controller
         $asigments = [];
         $query = Area::query();
         
-        $amountByArea = intval($request->amount / ($query->sum("workers_count") ?: 1));
+        $amountByArea = ceil($request->amount / ($query->sum("workers_count") ?: 1));
         $areas = $query->get();
 
         foreach ($areas as $key => $value) {
-             array_push($asigments, ['product_id'=>$product->id, 'area_id' => $value->id, 'created_at' => Carbon::now(), 'count' => $amountByArea, 'user_id' => Auth::user()->id]);
+             array_push($asigments, ['product_id'=>$product->id, 'area_id' => $value->id, 'created_at' => Carbon::now(), 'count' => $amountByArea * $value->workers_count, 'user_id' => Auth::user()->id]);
         }
 
         AreaProduct::insert($asigments);

@@ -119,7 +119,7 @@
                             <!-- BEGIN: Card Dropdown -->
 
                             <label class="relative" for="range-picker">
-                                <span class="z-40">
+                                <span class="z-40 cursor-pointer">
                                     <iconify-icon icon="clarity:calendar-solid"></iconify-icon>
                                 </span>
                                 <input
@@ -221,12 +221,25 @@
             // flatpickr
             $(".flatpickr").flatpickr({
                 dateFormat: "Y-m-d",
+                locale: {
+                    firstDayOfWeek: 1,
+                    weekdays: {
+                        shorthand: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+                        longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                    },
+                    months: {
+                        shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Оct', 'Nov', 'Dic'],
+                        longhand: ['Enero', 'Febrero', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto',
+                            'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                        ],
+                    },
+                },
                 onClose: (selectedDates, dateStr, instance) => {
                     // Acciones a realizar cuando se actualiza el rango de fechas
                     let dates = dateStr.substring(dateStr.lastIndexOf(':'));
                     dates = dates.split("to").map(el => el.trim());
-                    location.href = `/dashboard?dates=${dates}`
-                    // Otros códigos aquí...
+                    dates.length && dates[0] && (location.href =
+                        `/dashboard?dates=${dates}`)
                 }
             });
             // flatpickr

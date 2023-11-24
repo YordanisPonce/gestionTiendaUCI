@@ -15,7 +15,7 @@ class HomeController extends Controller
     /**
      * Analytic Dashboard
      */
-    public function index()
+    public function index(Request $request)
     {
         $chartData = [
             'revenueReport' => [
@@ -191,10 +191,22 @@ class HomeController extends Controller
             ],
         ];
 
-        $assigments = AreaProduct::with(['product', 'area', 'user'])->select(DB::raw('sum(count) as amount'), 'product_id', 'area_id',  'user_id')
-            ->groupBy(['product_id', 'area_id', 'user_id' ])
-            ->paginate(5);
+        $q = $request->get('dates');
+        $dates = explode(',', $q);
 
+        $assigments = AreaProduct::with(['product', 'area', 'user'])->select(DB::raw('sum(count) as amount'), 'product_id', 'area_id',  'user_id', DB::raw('DATE(created_at) as created_date'))
+            ->groupBy(['product_id', 'area_id', 'user_id', 'created_date'])
+            ->where(function ($query) use ($dates, $q) {
+                if ($q) {
+                    if (count($dates) > 1) {
+                        $query->whereBetween(DB::raw('DATE(created_at)'),  $dates);
+                    } else {
+                        $query->where(DB::raw('DATE(created_at)'),  $dates[0]);
+                    }
+                }
+            })
+            ->paginate(5);
+        $dates =  AreaProduct::select(DB::raw('DATE(created_at) as created_date'))->groupBy('created_date')->get();
         $products = AreaProduct::with('product')->select(DB::raw('sum(count) as amount'), 'product_id')->groupBy('product_id')->paginate(5);
         return view('Index', [
             'pageTitle' => 'P&aacute;gina principal',
@@ -203,6 +215,7 @@ class HomeController extends Controller
             'recentOrders' => $recentOrders,
             'assigments' => $assigments,
             'products' => $products,
+            'dates' => $dates,
         ]);
     }
 

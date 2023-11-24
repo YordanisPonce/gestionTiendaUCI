@@ -76,10 +76,10 @@
                                             </td>
 
                                             <td class="table-td">
-                                                {{ $asigment->product->name }}
+                                                {{ $asigment->area->name }}
                                             </td>
                                             <td class="table-td">
-                                                {{ $asigment->area->name }}
+                                                {{ $asigment->product->name }}
                                             </td>
                                             <td class="table-td">
                                                 {{ $asigment->count }}

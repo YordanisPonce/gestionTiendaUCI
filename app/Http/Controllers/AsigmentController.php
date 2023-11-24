@@ -45,7 +45,7 @@ class AsigmentController extends Controller
                 }
             })
             ->latest()
-            ->paginate($perPage)
+            ->paginate(AreaProduct::count())
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
 
         return view('asigment.index', [

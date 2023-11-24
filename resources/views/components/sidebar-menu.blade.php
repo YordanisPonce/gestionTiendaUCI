@@ -8,7 +8,7 @@
         <x-application-logo />
 
         <!-- Sidebar Type Button -->
-{{--         <div id="sidebar_type" class="cursor-pointer text-slate-900 dark:text-white text-lg">
+        {{--         <div id="sidebar_type" class="cursor-pointer text-slate-900 dark:text-white text-lg">
             <iconify-icon class="sidebarDotIcon extend-icon text-slate-900 dark:text-slate-200" icon="fa-regular:dot-circle"></iconify-icon>
             <iconify-icon class="sidebarDotIcon collapsed-icon text-slate-900 dark:text-slate-200" icon="material-symbols:circle-outline"></iconify-icon>
         </div>
@@ -16,30 +16,36 @@
             <iconify-icon class="text-slate-900 dark:text-slate-200" icon="clarity:window-close-line"></iconify-icon>
         </button> --}}
     </div>
-    <div id="nav_shadow" class="nav_shadow h-[60px] absolute top-[80px] nav-shadow z-[1] w-full transition-all duration-200 pointer-events-none
-      opacity-0"></div>
+    <div id="nav_shadow"
+        class="nav_shadow h-[60px] absolute top-[80px] nav-shadow z-[1] w-full transition-all duration-200 pointer-events-none
+      opacity-0">
+    </div>
     <div class="sidebar-menus bg-white dark:bg-slate-800 py-2 px-4 h-[calc(100%-80px)] z-50" id="sidebar_menus">
         <ul class="sidebar-menu">
             <li class="sidebar-menu-title">{{ __('MENU') }}</li>
             <li>
-                <a href="{{ route('dashboard.index') }}" class="navItem {{ (request()->is('dashboard*')) ? 'active' : '' }}">
+                <a href="{{ route('dashboard.index') }}"
+                    class="navItem {{ request()->is('dashboard*') ? 'active' : '' }}">
                     <span class="flex items-center">
                         <iconify-icon class=" nav-icon" icon="heroicons-outline:home"></iconify-icon>
-                        <span>{{ __('Inicio') }}</span>
+                        <span>{!! __('Estad&iacute;sticas') !!}</span>
                     </span>
                 </a>
             </li>
             <!-- Settings -->
             <li>
-                <a href="{{ route('products.index') }}" class="navItem {{ (request()->is('products*')) || (request()->is('products*')) || (request()->is('products*')) || (request()->is('products*')) || (request()->is('products*')) ? 'active' : '' }}">
+                <a href="{{ route('products.index') }}"
+                    class="navItem {{ request()->is('products*') || request()->is('products*') || request()->is('products*') || request()->is('products*') || request()->is('products*') ? 'active' : '' }}">
                     <span class="flex items-center">
-                        <iconify-icon class=" nav-icon" icon="streamline:food-drum-stick-1-cook-animal-drumsticks-products-chicken-cooking-nutrition-food"></iconify-icon>
+                        <iconify-icon class=" nav-icon"
+                            icon="streamline:food-drum-stick-1-cook-animal-drumsticks-products-chicken-cooking-nutrition-food"></iconify-icon>
                         <span>{{ __('Productos') }}</span>
                     </span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('users.index') }}" class="navItem {{ (request()->is('users*')) || (request()->is('users*')) || (request()->is('users*')) || (request()->is('users*')) || (request()->is('users*')) ? 'active' : '' }}">
+                <a href="{{ route('users.index') }}"
+                    class="navItem {{ request()->is('users*') || request()->is('users*') || request()->is('users*') || request()->is('users*') || request()->is('users*') ? 'active' : '' }}">
                     <span class="flex items-center">
                         <iconify-icon class=" nav-icon" icon="fa:users"></iconify-icon>
                         <span>{{ __('Usuarios') }}</span>
@@ -47,7 +53,8 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('areas.index') }}" class="navItem {{ (request()->is('areas*')) || (request()->is('areas*')) || (request()->is('areas*')) || (request()->is('areas*')) || (request()->is('areas*')) ? 'active' : '' }}">
+                <a href="{{ route('areas.index') }}"
+                    class="navItem {{ request()->is('areas*') || request()->is('areas*') || request()->is('areas*') || request()->is('areas*') || request()->is('areas*') ? 'active' : '' }}">
                     <span class="flex items-center">
                         <iconify-icon class=" nav-icon" icon="carbon:area-custom"></iconify-icon>
                         <span>{{ __('Areas') }}</span>
@@ -55,10 +62,11 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('area-products.index') }}" class="navItem {{ (request()->is('area-products*')) || (request()->is('area-products*')) || (request()->is('area-products*')) || (request()->is('area-products*')) || (request()->is('area-products*')) ? 'active' : '' }}">
+                <a href="{{ route('area-products.index') }}"
+                    class="navItem {{ request()->is('area-products*') || request()->is('area-products*') || request()->is('area-products*') || request()->is('area-products*') || request()->is('area-products*') ? 'active' : '' }}">
                     <span class="flex items-center">
                         <iconify-icon class=" nav-icon" icon="ph:shopping-cart-simple-bold"></iconify-icon>
-                        <span>{{ __('Asignaciones') }}</span>
+                        <span>{{ __('Ventas') }}</span>
                     </span>
                 </a>
             </li>

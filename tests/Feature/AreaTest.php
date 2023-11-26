@@ -54,4 +54,11 @@ class AreaTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirectToRoute('areas.index');
     }
+
+    public function test_user_can_search_areas()
+    {
+        $response = $this->get('/areas?q=Direcciones');
+        $response->assertStatus(302);
+        $response->assertRedirectToRoute('areas.index');
+    }
 }

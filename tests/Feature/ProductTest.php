@@ -66,6 +66,13 @@ class ProductTest extends TestCase
         $response->assertRedirectToRoute('products.index');
     }
 
+    public function test_user_can_search_products()
+    {
+        $response = $this->get('/areas?q=Jabon');
+        $response->assertStatus(302);
+        $response->assertRedirectToRoute('areas.products');
+    }
+
     public function test_asign_product_with_not_numeric_amount()
     {
         $product = Product::first();

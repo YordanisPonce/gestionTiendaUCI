@@ -15,8 +15,8 @@ class AsigmentTest extends TestCase
      */
     public function test_user_can_search_asigments()
     {
-        $response = $this->get('//area-products?q=Jabon');
+        $response = $this->get('/area-products?q=Jabon');
         $response->assertStatus(302);
-        $response->assertRedirectToRoute('areas.area-products');
+        $response->assertRedirectToRoute('area-products.index');
     }
 }

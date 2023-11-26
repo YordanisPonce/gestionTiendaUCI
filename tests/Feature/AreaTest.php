@@ -59,6 +59,6 @@ class AreaTest extends TestCase
     {
         $response = $this->get('/areas?q=Direcciones');
         $response->assertStatus(302);
-        $response->assertRedirectToRoute('areas.index');
+        $response->assertViewHas('areas');
     }
 }

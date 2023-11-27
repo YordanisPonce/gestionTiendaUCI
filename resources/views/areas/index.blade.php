@@ -26,10 +26,6 @@
                     </a>
                     {{--      @endcan --}}
                     {{-- Refresh Button start --}}
-                    <a class="btn inline-flex justify-center btn-dark rounded-[25px] items-center !p-2.5"
-                        href="{{ route('areas.index') }}">
-                        <iconify-icon icon="mdi:refresh" class="text-xl "></iconify-icon>
-                    </a>
                 </div>
                 <div class="justify-center flex flex-wrap sm:flex items-center lg:justify-end gap-3">
                     <div class="relative w-full sm:w-auto flex items-center">

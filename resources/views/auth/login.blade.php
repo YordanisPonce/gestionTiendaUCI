@@ -6,9 +6,9 @@
             </div>
         </div>
         <div class="text-center 2xl:mb-10 mb-4">
-            <h4 class="font-medium"> {!! __('Iniciar sess&oacute;n') !!}</h4>
+            <h4 class="font-medium"> {!! __('Iniciar sesi&oacute;n') !!}</h4>
             <div class="text-slate-500 text-base">
-                {{ __('Inicia session para comenzar a usar ' . config('app.name')) }}
+                {!! __('Inicia sesi&oacute;n para comenzar a usar ' . config('app.name')) !!}
             </div>
         </div>
 

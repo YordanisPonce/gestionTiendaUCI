@@ -140,10 +140,6 @@
                                                     @endcan
                                                     {{-- Edit --}}
 
-                                                    <a class="action-btn"
-                                                        href="{{ route('area-products.edit', $asigment) }}">
-                                                        <iconify-icon icon="heroicons:pencil-square"></iconify-icon>
-                                                    </a>
                                                     {{--          @endcan --}}
                                                     {{-- delete --}}
                                                     {{--  @can('product delete') --}}

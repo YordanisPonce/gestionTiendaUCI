@@ -163,7 +163,12 @@ class ProductController extends Controller
         $areas = $query->get();
 
         foreach ($areas as $key => $value) {
-             array_push($asigments, ['product_id'=>$product->id, 'area_id' => $value->id, 'created_at' => Carbon::now(), 'count' => $amountByArea * $value->workers_count, 'user_id' => Auth::user()->id]);
+             array_push($asigments, ['product_id'=>$product->id, 
+             'area_id' => $value->id, 
+             'created_at' => Carbon::now(),
+              'count' => $amountByArea * $value->workers_count,
+              'fecha' => $request->fecha,
+               'user_id' => Auth::user()->id]);
         }
 
         AreaProduct::insert($asigments);

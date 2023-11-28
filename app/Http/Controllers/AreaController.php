@@ -37,7 +37,6 @@ class AreaController extends Controller
         $areas = QueryBuilder::for(area::class)
             ->allowedSorts(['name'])
             ->where('name', 'like', "%$q%")
-            ->latest()
             ->paginate($perPage)
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
 

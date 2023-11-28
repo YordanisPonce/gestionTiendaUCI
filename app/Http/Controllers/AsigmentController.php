@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
 use App\Models\AreaProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -25,33 +26,61 @@ class AsigmentController extends Controller
 
         $breadcrumbsItems = [
             [
-                'name' => 'Asignaciones',
+                'name' => 'Ventas',
                 'url' => route('area-products.index'),
                 'active' => true
             ],
         ];
 
         $q = $request->get('q');
+        $qDate = $request->get('date');
         $perPage = $request->get('per_page', 10);
         $sort = $request->get('sort');
 
         $asigments = QueryBuilder::for(AreaProduct::class)
             ->allowedSorts(['count'])
             ->with(['area', 'product'])
-            ->where(function ($query) use ($q) {
+            ->where(function ($query) use ($q,  $qDate) {
                 if ($q) {
                     $ids = Product::where('name', 'like', $q . '%')->get(['id'])->pluck('id')->toArray();
                     $query->whereIn('product_id', $ids);
                 }
+
+                if ($qDate) {
+                    $query->where('fecha', $qDate);
+                }
             })
-            ->latest()
             ->paginate(AreaProduct::count())
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
+        $products = Product::whereIn(
+            'id',
+            AreaProduct::where(function ($query) use ($qDate) {
+                if ($qDate) {
+                    $query->where('fecha', $qDate);
+                }
+            })->get(['product_id'])->pluck('product_id')->toArray()
+        )->get();
+
+        $areas = Area::with('products')->get();
+        $dat = [];
+        $fill = [];
+        foreach ($areas as  $area) {
+            $dat['name'] = $area->name;
+            $amounts = [];
+            foreach ($products as $key => $value) {
+                $amounts[] = $area->products->where('id', $value->id)->count();
+            }
+            $dat['amountProducts'] = $amounts;
+            $fill[] =  $dat;
+        }
+
 
         return view('asigment.index', [
             'asigments' => $asigments,
             'breadcrumbItems' => $breadcrumbsItems,
-            'pageTitle' => 'Asignaciones'
+            'pageTitle' => 'Ventas',
+            'products' =>   $products,
+            'areas' =>  $fill,
         ]);
     }
 

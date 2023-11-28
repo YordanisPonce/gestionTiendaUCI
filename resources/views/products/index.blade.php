@@ -114,6 +114,10 @@
                     <label for="amount">Introducir cantidad en existencia:</label>
                     <input type="text" class="form-control p-5" placeholder="Cantidad" autofocus name="amount">
                 </div>
+                <div class="relative">
+                    <label for="amount">Introducir fecha de distribuci&oacute;n:</label>
+                    <input type="date" class="form-control p-5" autofocus name="fecha">
+                </div>
                 <button class="btn inline-flex justify-center btn-dark rounded-[25px] items-center"
                 href="{{ route('products.create') }}">
                 <iconify-icon icon="ic:round-plus" class="text-lg mr-1">

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('area_id')->unsigned()->nullable();
             $table->integer('product_id')->unsigned()->nullable();
             $table->integer('count')->unsigned()->nullable();
+            $table->date('fecha')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')
             ->references('id') // role id

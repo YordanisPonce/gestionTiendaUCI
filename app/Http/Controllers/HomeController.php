@@ -192,22 +192,50 @@ class HomeController extends Controller
         ];
 
         $q = $request->get('dates');
-        $dates = explode(',', $q);
+        $qProducts = $request->get('datesProduct');
+        $qProduct = $request->get('product');
+        $qArea = $request->get('area');
 
-        $assigments = AreaProduct::with(['product', 'area', 'user'])->select(DB::raw('sum(count) as amount'), 'product_id', 'area_id',  'user_id', DB::raw('DATE(created_at) as created_date'))
+
+        $dates = explode(',', $q);
+        $datesProducts = explode(',', $qProducts);
+        $assigments = AreaProduct::with(['product', 'area', 'user'])->select(DB::raw('sum(count) as amount'), 'product_id', 'area_id',  'user_id', DB::raw('DATE(fecha) as created_date'))
             ->groupBy(['product_id', 'area_id', 'user_id', 'created_date'])
-            ->where(function ($query) use ($dates, $q) {
+            ->where(function ($query) use ($dates, $q, $qArea, $qProduct) {
                 if ($q) {
                     if (count($dates) > 1) {
-                        $query->whereBetween(DB::raw('DATE(created_at)'),  $dates);
+                        $query->whereBetween(DB::raw('DATE(fecha)'),  $dates);
                     } else {
-                        $query->where(DB::raw('DATE(created_at)'),  $dates[0]);
+                        $query->where(DB::raw('DATE(fecha)'),  $dates[0]);
+                    }
+                }
+
+                if ($qArea) {
+                    $query->where('area_id', $qArea);
+                }
+
+                if ($qProduct) {
+                    $query->where('product_id', $qProduct);
+                }
+            })
+            ->paginate(5, ['*'], 'p1');
+        $dates =  AreaProduct::select(DB::raw('DATE(created_at) as created_date'))->groupBy('created_date')->get();
+        $products = AreaProduct::with('product')
+            ->select(DB::raw('sum(count) as amount'), 'product_id')
+            ->where(function ($query) use ($datesProducts, $qProducts) {
+                if ($qProducts) {
+                    if (count($datesProducts) > 1) {
+                        $query->whereBetween(DB::raw('DATE(fecha)'), $datesProducts);
+                    } else {
+                        $query->where(DB::raw('DATE(fecha)'), $datesProducts[0]);
                     }
                 }
             })
-            ->paginate(5);
-        $dates =  AreaProduct::select(DB::raw('DATE(created_at) as created_date'))->groupBy('created_date')->get();
-        $products = AreaProduct::with('product')->select(DB::raw('sum(count) as amount'), 'product_id')->groupBy('product_id')->paginate(5);
+            ->groupBy('product_id')
+            ->paginate(5, ['*'], 'p2');
+
+        $singleAreas = Area::all();
+        $singleProducts = Product::all();
         return view('Index', [
             'pageTitle' => 'P&aacute;gina principal',
             'data' => $chartData,
@@ -216,6 +244,8 @@ class HomeController extends Controller
             'assigments' => $assigments,
             'products' => $products,
             'dates' => $dates,
+            'singleAreas' => $singleAreas,
+            'singleProducts' => $singleProducts,
         ]);
     }
 

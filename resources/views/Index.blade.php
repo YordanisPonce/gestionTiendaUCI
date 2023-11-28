@@ -1,3 +1,9 @@
+@php
+
+    $areaId = request()->query('area');
+    $productId = request()->query('product');
+@endphp
+
 <x-app-layout>
     <div class="space-y-8">
         <div class="block sm:flex items-center justify-between mb-6">
@@ -77,8 +83,18 @@
             {{-- Statistics Chats  --}}
             <div class="mt-8 xl:mt-0 xl:w-4/12 bg-white  dark:bg-slate-800 rounded-md w-full flex flex-col h-fit">
                 <h3
-                    class="px-6 py-5 font-Interfont-normal text-black dark:text-white text-xl border-b border-b-slate-100 dark:border-b-slate-900">
-                    Total de productos
+                    class="flex px-6 py-5 font-Interfont-normal text-black dark:text-white text-xl border-b border-b-slate-100 dark:border-b-slate-900">
+                    <span class="flex-1">Total de productos</span>
+                    <span>
+                        <label class="relative" for="range-picker2">
+                            <span class="z-40 cursor-pointer">
+                                <iconify-icon icon="clarity:calendar-solid"></iconify-icon>
+                            </span>
+                            <input
+                                class="z-30 form-control py-2 flatpickr flatpickr-input active absolute top-[-10px] invisible"
+                                id="range-picker2" data-mode="range" value="" type="text" readonly="readonly">
+                        </label>
+                    </span>
                 </h3>
                 <div @class(['overflow-hidden'])>
                     @isset($products)
@@ -103,9 +119,8 @@
                     @endisset
                 </div>
                 <div class="mt-auto p-3">
-                    @if (count($products) > 5)
-                        {{ $products->links() }}
-                    @endif
+
+                    {{ $products->links() }}
                 </div>
             </div>
 
@@ -115,9 +130,41 @@
                         <h4 class="card-title">
                             Ventas
                         </h4>
-                        <div>
-                            <!-- BEGIN: Card Dropdown -->
+                        <div class="flex gap-2 items-center">
+                            <div>
+                                <select name="select2basic" id="products"
+                                    class="select2 form-control w-full mt-2 py-2">
+                                    <option value="0"
+                                        class=" inline-block font-Inter font-normal text-sm text-slate-600 w-72">Todos
+                                        los
+                                        productos
+                                    </option>
+                                    @foreach ($singleProducts as $item)
+                                        <option value="{{ $item->id }}" @selected($productId && $productId == $item->id)
+                                            class=" inline-block font-Inter font-normal text-sm text-slate-600 w-72">
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div>
+                                <select name="select2basic" id="areas"
+                                    class="select2 form-control w-full mt-2 py-2">
+                                    <option value="0"
+                                        class=" inline-block font-Inter font-normal text-sm text-slate-600 w-72">Todas
+                                        las
+                                        areas
+                                    </option>
 
+                                    @foreach ($singleAreas as $item)
+                                        <option @selected($areaId && $areaId == $item->id) value="{{ $item->id }}"
+                                            class=" inline-block font-Inter font-normal text-sm text-slate-600 w-72">
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
                             <label class="relative" for="range-picker">
                                 <span class="z-40 cursor-pointer">
                                     <iconify-icon icon="clarity:calendar-solid"></iconify-icon>
@@ -175,8 +222,9 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td class="table-td">{{ $item->product->name }}</td>
-                                                    <td class="table-td">{{ $item->area->name }}</td>
+                                                    <td class="table-td">{{ $item->product->name ?? 'No definido' }}
+                                                    </td>
+                                                    <td class="table-td">{{ $item->area->name ?? 'No definido' }}</td>
                                                     <td class="table-td">{{ $item->created_date }}</td>
                                                     <td class="table-td ">
                                                         <div
@@ -217,6 +265,7 @@
     </div>
     @push('scripts')
         @vite(['resources/js/plugins/flatpickr.js'])
+        @vite(['resources/js/plugins/Select2.min.js'])
         <script type="module">
             // flatpickr
             $(".flatpickr").flatpickr({
@@ -235,11 +284,36 @@
                     },
                 },
                 onClose: (selectedDates, dateStr, instance) => {
+                    const id = instance?.input?.id;
+                    // Obtén la URL actual
+                    var url = new URL(window.location.href);
+
+                    // Obtiene los parámetros de consulta actuales
+                    var queryParams = new URLSearchParams(url.search);
+
                     // Acciones a realizar cuando se actualiza el rango de fechas
                     let dates = dateStr.substring(dateStr.lastIndexOf(':'));
                     dates = dates.split("to").map(el => el.trim());
-                    dates.length && dates[0] && (location.href =
-                        `/dashboard?dates=${dates}`)
+                    if (id == 'range-picker') {
+                        if (dates.length && dates[0]) {
+                            // Agrega o actualiza los parámetros de consulta deseados
+                            queryParams.set('dates', dates);
+
+                            // Crea una nueva URL con los parámetros actualizados
+                            var nuevaUrl = url.origin + url.pathname + '?' + queryParams.toString();
+
+                            // Redirige a la nueva URL
+
+                        }
+                    } else {
+                        if (dates.length && dates[0]) {
+                            // Agrega o actualiza los parámetros de consulta deseados
+                            queryParams.set('datesProduct', dates);
+                            // Crea una nueva URL con los parámetros actualizados
+                            var nuevaUrl = url.origin + url.pathname + '?' + queryParams.toString();
+                        }
+                    }
+                    nuevaUrl && (window.location.href = nuevaUrl);
                 }
             });
             // flatpickr
@@ -478,6 +552,31 @@
                 growthChartSelector,
                 growthChartConfig
             ).render();
+
+            // Form Select Area
+            $(".select2").select2({
+                placeholder: "Seleccionar opción",
+            });
+
+            $(".select2").on("change", function(e) {
+                var selectedValue = $(this).val();
+                // Obtén la URL actual
+                var url = new URL(window.location.href);
+                // Obtiene los parámetros de consulta actuales
+                var queryParams = new URLSearchParams(url.search);
+
+                // Agrega o actualiza los parámetros de consulta deseados
+                if (selectedValue) {
+                    queryParams.set(e.target.id.slice(0, -1), selectedValue);
+                } else {
+                    queryParams.delete(e.target.id.slice(-1, 0));
+                }
+
+
+                // Crea una nueva URL con los parámetros actualizados
+                var nuevaUrl = url.origin + url.pathname + '?' + queryParams.toString();
+                window.location.href = nuevaUrl;
+            });
         </script>
     @endpush
 </x-app-layout>

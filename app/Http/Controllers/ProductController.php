@@ -35,11 +35,11 @@ class ProductController extends Controller
         $q = $request->get('q');
         $perPage = $request->get('per_page', 10);
         $sort = $request->get('sort');
-
+  
+        
         $products = QueryBuilder::for(Product::class)
             ->allowedSorts(['name'])
             ->where('name', 'like', "%$q%")
-            ->latest()
             ->paginate($perPage)
             ->appends(['per_page' => $perPage, 'q' => $q, 'sort' => $sort]);
 

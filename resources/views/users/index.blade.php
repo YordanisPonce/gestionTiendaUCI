@@ -80,7 +80,8 @@
                                             </div>
                                         </td>
                                         <td class="table-td">
-                                            {{ $user->email }}
+                                            <span class="lowercase">{{ $user->email }}</span>
+                                            
                                         </td>
                                         <td class="table-td">
                                             @if($user->email_verified_at)

@@ -263,10 +263,11 @@
         </div>
 
     </div>
+    
     @push('scripts')
-        @vite(['resources/js/plugins/flatpickr.js'])
+    @vite(['resources/js/plugins/flatpickr.js'])
         @vite(['resources/js/plugins/Select2.min.js'])
-        <script type="module">
+    <script type="module">
             // flatpickr
             $(".flatpickr").flatpickr({
                 dateFormat: "Y-m-d",

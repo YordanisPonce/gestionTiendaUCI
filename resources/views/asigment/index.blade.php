@@ -183,7 +183,7 @@
                 } = event;
                 const td = target.closest('td');
                 const value = target.value;
-                if (isNaN(value)) {
+                if (isNaN(value) || value == '') {
                     td.innerHTML = 0;
                     alert('El campo debe ser un numero, los cambios no seran guardados')
                 } else {

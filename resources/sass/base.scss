@@ -142,3 +142,7 @@
 .rotate-icon {
     transform: rotate(180deg);
 }
+
+.input-save-new-amount{
+  @apply w-10 h-5; 
+}

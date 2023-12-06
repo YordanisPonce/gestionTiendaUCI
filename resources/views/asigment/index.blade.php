@@ -38,13 +38,14 @@
                     <span class="z-40 cursor-pointer">
                         <iconify-icon icon="ph:export"></iconify-icon>
                     </span>
-                    </button>
+                </button>
             </header>
             <div class="card-body px-6 pb-6">
                 <div class="overflow-x-auto -mx-6">
                     <div class="inline-block min-w-full align-middle">
                         <div class="overflow-hidden ">
-                            <table class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700" id="tableToExport">
+                            <table class="min-w-full divide-y divide-slate-100 table-fixed dark:divide-slate-700"
+                                id="tableToExport">
                                 <thead class="bg-slate-200 dark:bg-slate-700">
                                     <tr>
                                         <th scope="col" class="table-th ">
@@ -71,8 +72,9 @@
                                                 {{ $area['name'] }}
                                             </td>
                                             @foreach ($area['amountProducts'] as $amount)
-                                                <td class="table-td">
-                                                    {{ $amount }}
+                                                <td class="table-td" data-area="{{ $area['id'] }}"
+                                                    data-product="{{ $amount['id'] }}" ondblclick="updatevalue(event)">
+                                                    {{ $amount['content'] }}
                                                 </td>
                                             @endforeach
                                         </tr>
@@ -170,6 +172,59 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         form.submit();
+                    }
+                })
+            }
+
+            const handleUpdateAmount = event => {
+                event = event || window.event;
+                const {
+                    target
+                } = event;
+                const td = target.closest('td');
+                const value = target.value;
+                if (isNaN(value)) {
+                    td.innerHTML = 0;
+                    alert('El campo debe ser un numero, los cambios no seran guardados')
+                } else {
+                    td.innerHTML = `
+                    <span class="animate-spin text-success-600"><iconify-icon icon="eos-icons:loading" /></span>
+                    `;
+                    const body = {
+                        area_id: td.getAttribute('data-area'),
+                        product_id: td.getAttribute('data-product'),
+                        amount: parseInt(value)
+                    };
+                    asyncUpdateAmount(body, td)
+                }
+
+            }
+
+            const updatevalue = event => {
+                event = event || window.event;
+                const {
+                    target
+                } = event;
+                let valorOriginal = parseInt(target.textContent);
+                target.innerHTML =
+                    `<input type="text" class="input-save-new-amount" onblur="handleUpdateAmount(event)"  value="${isNaN(valorOriginal) ? 0 : valorOriginal}">`;
+                target.firstChild.focus();
+
+            }
+
+            const asyncUpdateAmount = (body, td) => {
+                const token = document.querySelector('meta[name="csrf-token"]').content;
+                fetch('/area-products-update-amount', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    body: JSON.stringify(body)
+                }).then(res => res.json()).then(res => {
+                    if (res.success) {
+                        td.innerHTML = res.value
                     }
                 })
             }

@@ -66,10 +66,16 @@ class AsigmentController extends Controller
         $fill = [];
         foreach ($areas as  $area) {
             $dat['name'] = $area->name;
+            $dat['id'] = $area->id;
             $amounts = [];
             foreach ($products as $key => $value) {
-               // $amounts[] = $area->products->where('id', $value->id)->count();
-               $amounts[] = intval(AreaProduct::where('area_id', $area->id)->where('product_id',$value->id)->first()->count); 
+                array_push(
+                    $amounts,
+                    [
+                        'content' => intval(AreaProduct::where('area_id', $area->id)->where('product_id', $value->id)->first()->count),
+                        'id' => $value->id
+                    ]
+                );
             }
             $dat['amountProducts'] = $amounts;
             $fill[] =  $dat;
@@ -154,5 +160,18 @@ class AsigmentController extends Controller
     {
         $areaProduct->delete();
         return redirect()->back()->with('message', 'Asignacion eliminada existosamente');
+    }
+
+    public function updateAmount(Request $request)
+    {
+
+        try {
+            $obj = AreaProduct::where('area_id', $request->area_id)->where('product_id', $request->product_id)->first();
+            throw_if(!$obj, 'No se encuentra producto con los valores proporcionados');
+            $obj->update(['count' => $request->amount]);
+            return response()->json(['success' =>  true, 'message' => 'Producto actualizado existosamente', 'value' => $obj->count], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['success' =>  false, 'message' => $th->getMessage()], 200);
+        }
     }
 }

@@ -23,45 +23,46 @@ use App\Http\Controllers\ProductController;
 require __DIR__ . '/auth.php';
 
 Route::get('/', function () {
-    return to_route('login');
+  return to_route('login');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    // Dashboards
-    Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard.index');
-    // Locale
-    Route::get('setlocale/{locale}', SetLocaleController::class)->name('setlocale');
+  // Dashboards
+  Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard.index');
+  // Locale
+  Route::get('setlocale/{locale}', SetLocaleController::class)->name('setlocale');
 
-    // User
-    Route::resource('users', UserController::class);
-    // Permission
-    Route::resource('permissions', PermissionController::class)->except(['show']);
-    // Roles
-    Route::resource('roles', RoleController::class);
-    // Profiles
-    Route::resource('profiles', ProfileController::class)->only(['index', 'update'])->parameter('profiles', 'user');
-    // Env
-    Route::singleton('general-settings', GeneralSettingController::class);
-    Route::post('general-settings-logo', [GeneralSettingController::class, 'logoUpdate'])->name('general-settings.logo');
+  // User
+  Route::resource('users', UserController::class);
+  // Permission
+  Route::resource('permissions', PermissionController::class)->except(['show']);
+  // Roles
+  Route::resource('roles', RoleController::class);
+  // Profiles
+  Route::resource('profiles', ProfileController::class)->only(['index', 'update'])->parameter('profiles', 'user');
+  // Env
+  Route::singleton('general-settings', GeneralSettingController::class);
+  Route::post('general-settings-logo', [GeneralSettingController::class, 'logoUpdate'])->name('general-settings.logo');
 
-    // Database Backup
-    Route::resource('database-backups', DatabaseBackupController::class);
-    // Areas 
-    Route::resource('areas', AreaController::class);
-    Route::controller(AreaController::class)->prefix('areas')->as('areas.')->group(function () {
-      Route::get('asign/{area}', 'asign')->name('asign');
-      Route::post('asign/{area}', 'asignProduct')->name('asignProduct');
-    });
-
-
-    // Product
-    Route::resource('products', ProductController::class);
-    Route::controller(ProductController::class)->prefix('products')->as('products.')->group(function () {
-        Route::post('asign-product/{product}', 'asignProduct')->name('asignProduct');
-      });
+  // Database Backup
+  Route::resource('database-backups', DatabaseBackupController::class);
+  // Areas 
+  Route::resource('areas', AreaController::class);
+  Route::controller(AreaController::class)->prefix('areas')->as('areas.')->group(function () {
+    Route::get('asign/{area}', 'asign')->name('asign');
+    Route::post('asign/{area}', 'asignProduct')->name('asignProduct');
+  });
 
 
-        // Asigments
-        Route::resource('area-products', AsigmentController::class);
-    Route::get('database-backups-download/{fileName}', [DatabaseBackupController::class, 'databaseBackupDownload'])->name('database-backups.download');
+  // Product
+  Route::resource('products', ProductController::class);
+  Route::controller(ProductController::class)->prefix('products')->as('products.')->group(function () {
+    Route::post('asign-product/{product}', 'asignProduct')->name('asignProduct');
+  });
+
+
+  // Asigments
+  Route::resource('area-products', AsigmentController::class);
+  Route::post('area-products-update-amount', [AsigmentController::class, 'updateAmount']);
+  Route::get('database-backups-download/{fileName}', [DatabaseBackupController::class, 'databaseBackupDownload'])->name('database-backups.download');
 });

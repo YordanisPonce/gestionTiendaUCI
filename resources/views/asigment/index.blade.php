@@ -200,6 +200,11 @@
 
             }
 
+            const onEnter = e => {
+                (e.keyCode === 13) && e.target.blur();
+
+            }
+
             const updatevalue = event => {
                 event = event || window.event;
                 const {
@@ -207,7 +212,7 @@
                 } = event;
                 let valorOriginal = parseInt(target.textContent);
                 target.innerHTML =
-                    `<input type="text" class="input-save-new-amount" onblur="handleUpdateAmount(event)"  value="${isNaN(valorOriginal) ? 0 : valorOriginal}">`;
+                    `<input type="text" class="input-save-new-amount" onkeydown="onEnter(event)" onblur="handleUpdateAmount(event)"  value="${isNaN(valorOriginal) ? 0 : valorOriginal}">`;
                 target.firstChild.focus();
 
             }

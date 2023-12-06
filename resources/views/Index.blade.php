@@ -110,7 +110,7 @@
                                     </small>
                                 </p>
                                 <small>
-                                    <span>Total: {{ $item->amount }}</span>
+                                    <span>Total: {{ intval($item->amount) }}</span>
                                 </small>
                             </div>
                         @empty
@@ -229,7 +229,7 @@
                                                     <td class="table-td ">
                                                         <div
                                                             class="inline-block px-3 min-w-[90px] text-center mx-auto py-1 rounded-[999px]">
-                                                            {{ $item->amount }}
+                                                            {{ intval($item->amount) }}
                                                         </div>
 
                                                     </td>

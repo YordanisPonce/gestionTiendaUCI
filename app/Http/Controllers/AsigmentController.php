@@ -68,7 +68,8 @@ class AsigmentController extends Controller
             $dat['name'] = $area->name;
             $amounts = [];
             foreach ($products as $key => $value) {
-                $amounts[] = $area->products->where('id', $value->id)->count();
+               // $amounts[] = $area->products->where('id', $value->id)->count();
+               $amounts[] = intval(AreaProduct::where('area_id', $area->id)->where('product_id',$value->id)->first()->count); 
             }
             $dat['amountProducts'] = $amounts;
             $fill[] =  $dat;
